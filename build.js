@@ -28,4 +28,4 @@ async function render() {
     await fs.writeFile(path.resolve(__dirname, './build/index.html'), output);
 }
 
-render();
+render().catch(e => { console.error(e); process.exit(1); });
