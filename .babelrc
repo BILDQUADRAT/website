@@ -1,0 +1,16 @@
+{
+    "presets": [
+        ["@babel/env", {
+            "targets": {
+                "browsers": [
+                    "last 2 versions",
+                    "IE 11"
+                ]
+            }
+        }],
+        "@babel/react",
+        ["@babel/stage-2", {
+            "decoratorsLegacy": true
+        }]
+    ]
+}
