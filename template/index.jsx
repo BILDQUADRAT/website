@@ -1,7 +1,11 @@
 import React from 'react';
 import { hydrate, render } from 'react-dom';
-import { ClientApp } from './client';
+import { App } from './app';
+import { ContentProvider } from './util/content-provider';
+import store from './store';
 
 const renderFunc = process.env.IS_DEV_SERVER ? render : hydrate;
+
+const ClientApp = ContentProvider(store)(App);
 
 renderFunc(<ClientApp/>, document.getElementById('root'));

@@ -12,5 +12,8 @@
         ["@babel/stage-2", {
             "decoratorsLegacy": true
         }]
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
     ]
 }

@@ -3,18 +3,19 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 module.exports = (env = {}) => {
     const isDevServer = !!env.devServer;
     const isDev = process.env.NODE_ENV !== 'production' && isDevServer;
 
-    return {
+    return [{
         mode: !isDev ? 'production' : 'development',
 
         entry: {
             index: [
                 '@babel/polyfill',
-                './template/index.js',
+                './template/index.jsx',
                 './template/styles/main.scss',
             ],
         },
@@ -43,7 +44,8 @@ module.exports = (env = {}) => {
                     test: /\.jsx?$/,
                     use: [
                         { loader: 'babel-loader' },
-                    ]
+                    ],
+                    exclude: /node_modules/,
                 },
                 {
                     test: /\.css$/,
@@ -80,6 +82,7 @@ module.exports = (env = {}) => {
             }),
 
             new CopyWebpackPlugin([
+                { from: 'template/assets/', to: '' },
                 /*
                             { from: 'public/images/', to: 'images/' },
                             { from: 'public/fonts/', to: 'fonts/' },
@@ -102,13 +105,73 @@ module.exports = (env = {}) => {
                 filename: isDevServer ? 'index.html' : '../.tmp/index.html.ejs',
                 hash: true,
             }),
+
+            new ScriptExtHtmlWebpackPlugin({
+                defaultAttribute: 'async'
+            }),
         ],
 
         devtool: 'cheap-module-source-map',
         devServer: {
-            contentBase: path.join(__dirname, 'template/assets'),
+            contentBase: [path.join(__dirname, 'template/assets'), __dirname],
             port: process.env.PORT || 8080,
             publicPath: '/',
         }
-    }
+    }, {
+        mode: !isDev ? 'production' : 'development',
+
+        entry: {
+            cms: [
+                './template/cms.jsx',
+                'netlify-cms/dist/cms.css'
+            ],
+        },
+
+        output: {
+            path: path.join(__dirname, "build/cms"),
+            publicPath: "/cms/",
+            filename: "[name].js"
+        },
+
+        module: {
+            rules: [
+                {
+                    test: /\.((png)|(eot)|(woff)|(woff2)|(ttf)|(svg)|(gif))(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: "file-loader?name=/[hash].[ext]"
+                },
+                {
+                    loader: "babel-loader",
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    query: {cacheDirectory: true}
+                },
+                {
+                    test: /\.css$/,
+                    use: [
+                        { loader: MiniCssExtractPlugin.loader },
+                        { loader: 'css-loader' },
+                    ],
+                },
+            ]
+        },
+
+        plugins: [
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+            }),
+
+            new HtmlWebpackPlugin({
+                inject: 'body',
+                title: 'Netlify CMS',
+                filename: 'index.html',
+                hash: true,
+            }),
+
+            new CopyWebpackPlugin([
+                { from: 'template/netlifycms.yml', to: 'config.yml' },
+            ]),
+        ],
+
+        devtool: 'cheap-module-source-map',
+    }];
 };

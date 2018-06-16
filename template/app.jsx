@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import HomePage from './pages/home';
 import store from './store';
 
-export class ClientApp extends Component {
+export class App extends Component {
     render () {
         return (
             <Provider store={store}>

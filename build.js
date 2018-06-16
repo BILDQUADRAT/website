@@ -3,29 +3,44 @@ import { renderToString } from 'react-dom/server';
 import ejs from 'ejs';
 import path from 'path';
 import fsBase from 'fs';
-import { StaticApp } from './template/static';
-import store from './template/store';
+import { safeLoad } from 'js-yaml';
+
+import store, { setContent } from './template/store';
+import { App } from './template/app';
+
 const fs = fsBase.promises;
 
-async function render() {
-    // Render the component to a string
-    const html = renderToString(
-        <StaticApp/>
-    );
+class StaticRenderer {
+    async getContentForPage(page) {
+        const pagePath = path.resolve(__dirname, `./content/pages/${page}.yml`);
+        const pageDef = await fs.readFile(pagePath, 'utf-8');
+        return safeLoad(pageDef);
+    }
 
-    // prepare Redux preloaded state
-    const preloadedState = store.getState();
-    const scriptInsert = `window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`;
+    async render() {
+        // Load content
+        const content = await this.getContentForPage('home');
+        store.dispatch(setContent(content));
 
-    const template = (await fs.readFile(path.resolve(__dirname, './.tmp/index.html.ejs'))).toString();
+        // Render the component to a string
+        const html = renderToString(
+            <App/>
+        );
 
-    const output = ejs.render(template, {
-        title: "BILDQUADRAT",
-        html,
-        scriptInsert,
-    });
+        // prepare Redux preloaded state
+        const preloadedState = store.getState();
+        const scriptInsert = `window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`;
 
-    await fs.writeFile(path.resolve(__dirname, './build/index.html'), output);
+        const template = await fs.readFile(path.resolve(__dirname, './.tmp/index.html.ejs'), 'utf-8');
+
+        const output = ejs.render(template, {
+            title: "BILDQUADRAT",
+            html,
+            scriptInsert,
+        });
+
+        await fs.writeFile(path.resolve(__dirname, './build/index.html'), output);
+    }
 }
 
-render().catch(e => { console.error(e); process.exit(1); });
+new StaticRenderer().render().catch(e => { console.error(e); process.exit(1); });

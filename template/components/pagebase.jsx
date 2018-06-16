@@ -18,6 +18,10 @@ export default class PageBase extends React.Component {
         ]),
     }
 
+    componentDidMount () {
+        setTimeout(() => document.body.classList.remove('is-preload'), 100);
+    }
+
     render () {
         return (
             <React.Fragment>

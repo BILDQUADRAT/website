@@ -14,11 +14,6 @@
 		<div id="root"><%- html %></div>
 		<script>
 			<%- scriptInsert %>
-			window.addEventListener('load', function() {
-				setTimeout(function() {
-					document.body.classList.remove('is-preload');
-				}, 100);
-			});
 		</script>
     </body>
 </html>
