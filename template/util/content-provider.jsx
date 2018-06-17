@@ -14,9 +14,13 @@ export const ContentProvider = store => WrappedComponent => {
                 return;
             }
 
-            const pageName = 'home';
-            const pageDef = await (await fetch(`/content/pages/${pageName}.yml`)).text();
-            const page = safeLoad(pageDef);
+            const url = 'pages/home';
+            const pageRes = await fetch(`/content/${url}.yml`);
+            if (!pageRes.ok) {
+                return;
+            }
+
+            const page = safeLoad(await pageRes.text());
             store.dispatch(setContent(page));
         }
 

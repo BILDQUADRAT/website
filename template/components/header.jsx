@@ -4,13 +4,13 @@ import { setMenuOpen } from '../store';
 import PropTypes from 'prop-types';
 
 @connect(
-    () => ({}),
+    null,
     dispatch => ({
         openMenu: () => dispatch(setMenuOpen(true)),
     })
 )
 
-export default class Header extends Component {
+export class Header extends Component {
     static propTypes = {
         openMenu: PropTypes.func.isRequired,
     }
@@ -26,3 +26,5 @@ export default class Header extends Component {
         )
     }
 }
+
+export default Header;

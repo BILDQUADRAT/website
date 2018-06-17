@@ -1,17 +1,27 @@
-export const Tile = () => (
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export const Tile = props => (
     <article>
-        <span className="image">
-            <img src="images/pic01.jpg" alt="" />
-        </span>
+        {props.imageSource ? (
+            <span className="image">
+                <img src={props.imageSource} alt={props.imageAlt} />
+            </span>
+        ) : null}
         <header className="major">
-            <h3><a href="landing.html" className="link">Aliquam</a></h3>
-            <p>Ipsum dolor sit amet</p>
+            <h3><a href={props.link} className="link">{props.headline}</a></h3>
+            <p>{props.copy}</p>
         </header>
     </article>
 );
+Tile.propTypes = {
+    imageSource: PropTypes.string,
+    imageAlt: PropTypes.string,
+    link: PropTypes.string,
+    headline: PropTypes.string.isRequired,
+    copy: PropTypes.string,
+}
 
-export const Tiles = props => (
-    <section id="one" className="tiles">
-        {props.children}
-    </section>
+export const TileSection = props => (
+    <section className="tiles" {...props} />
 );

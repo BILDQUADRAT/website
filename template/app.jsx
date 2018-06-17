@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import HomePage from './pages/home';
 import store from './store';
+import netlifyIdentity from 'netlify-identity-widget';
+import { TemplateRouter } from './router';
+import { LocationContext } from './util/location-provider';
 
 export class App extends Component {
+    componentDidMount () {
+        netlifyIdentity.on("init", user => {
+            if (!!user) {
+                return;
+            }
+
+            netlifyIdentity.on("login", () => {
+                window.location.href = '/admin/';
+            });
+        });
+        netlifyIdentity.init();
+    }
+
     render () {
         return (
             <Provider store={store}>
-                <HomePage />
-                {/* will need to determine current page here. some kind of routing required */}
+                <LocationContext.Consumer>
+                    {locationState => (
+                        <TemplateRouter {...this.props} location={locationState} />
+                    )}
+                </LocationContext.Consumer>
             </Provider>
         )
     }

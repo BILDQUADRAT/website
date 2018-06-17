@@ -18,9 +18,27 @@ export function setContent(content) {
     }
 }
 
+const SET_CONFIG = 'SET_CONFIG';
+export function setConfig(config) {
+    return {
+        type: SET_CONFIG,
+        payload: config,
+    }
+}
+
+const SET_COLLECTIONS = 'SET_COLLECTIONS';
+export function setCollections(collections) {
+    return {
+        type: SET_COLLECTIONS,
+        payload: collections,
+    }
+}
+
 export const initialState = {
     menuOpen: false,
     content: {},
+    config: {},
+    collections: {},
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +53,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 content: action.payload,
             }
+        case SET_CONFIG:
+            return {
+                ...state,
+                config: action.payload,
+            }
+        case SET_COLLECTIONS:
+            return {
+                ...state,
+                collections: action.payload,
+            }
         default:
             return state;
     }
@@ -44,8 +72,6 @@ const reducer = (state = initialState, action) => {
 let preloadedState = undefined;
 if (ExecutionEnvironment.canUseDOM && '__PRELOADED_STATE__' in window) {
     preloadedState = window.__PRELOADED_STATE__;
-    // Allow the passed state to be garbage-collected
-    delete window.__PRELOADED_STATE__;
 }
 
 export const store = createStore(

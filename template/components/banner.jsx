@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-@connect(
-    state => ({
-        content: state.content,
-    })
-)
 export class Banner extends Component {
     static propTypes = {
-        content: PropTypes.object.isRequired,
+        content: PropTypes.shape({
+            banner_headline: PropTypes.string.isRequired,
+            banner_subheader: PropTypes.string.isRequired,
+            banner_cta: PropTypes.string.isRequired,
+        }),
     }
 
     render() {

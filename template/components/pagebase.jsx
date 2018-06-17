@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
         menuOpen: state.menuOpen,
     })
 )
-export default class PageBase extends React.Component {
+export class PageBase extends React.Component {
     static propTypes = {
         menuOpen: PropTypes.bool,
         children: PropTypes.oneOfType([
@@ -34,3 +34,5 @@ export default class PageBase extends React.Component {
         )
     }
 }
+
+export default PageBase;

@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
+require("@babel/register");
+require("@babel/polyfill");
+const { getContentMap } = require('./template/util/collect-content');
+
 module.exports = (env = {}) => {
     const isDevServer = !!env.devServer;
     const isDev = process.env.NODE_ENV !== 'production' && isDevServer;
@@ -18,6 +22,7 @@ module.exports = (env = {}) => {
                 './template/index.jsx',
                 './template/styles/main.scss',
             ],
+            content: './template/import-all.js',
         },
 
         output: {
@@ -95,7 +100,7 @@ module.exports = (env = {}) => {
 
             new HtmlWebpackPlugin({
                 inject: 'body',
-                chunks: ['index'],
+                chunks: ['index', 'content'],
                 template: './template/index.html.ejs',
                 templateParameters: {
                     html: "",
@@ -116,6 +121,12 @@ module.exports = (env = {}) => {
             contentBase: [path.join(__dirname, 'template/assets'), __dirname],
             port: process.env.PORT || 8080,
             publicPath: '/',
+            before: app => {
+                app.get('/content.json', async (req, res) => {
+                    const content = await getContentMap().catch(e => { console.error(e); res.status(500).end(); });
+                    res.json(content);
+                });
+            },
         }
     }, {
         mode: !isDev ? 'production' : 'development',
@@ -125,12 +136,22 @@ module.exports = (env = {}) => {
                 './template/cms.jsx',
                 'netlify-cms/dist/cms.css'
             ],
+            site: [
+                './template/styles/cms.scss',
+            ],
         },
 
         output: {
             path: path.join(__dirname, "build/cms"),
             publicPath: "/cms/",
             filename: "[name].js"
+        },
+
+        resolve: {
+            modules: [
+                'node_modules',
+            ],
+            extensions: ['.js', '.jsx'],
         },
 
         module: {
@@ -144,6 +165,14 @@ module.exports = (env = {}) => {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     query: {cacheDirectory: true}
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        { loader: MiniCssExtractPlugin.loader },
+                        { loader: 'css-loader', options: { url: false } },
+                        { loader: 'sass-loader' },
+                    ],
                 },
                 {
                     test: /\.css$/,
@@ -162,13 +191,14 @@ module.exports = (env = {}) => {
 
             new HtmlWebpackPlugin({
                 inject: 'body',
+                chunks: ['cms'],
                 title: 'Netlify CMS',
                 filename: 'index.html',
                 hash: true,
             }),
 
             new CopyWebpackPlugin([
-                { from: 'template/netlifycms.yml', to: 'config.yml' },
+                { from: 'template/cms.yml', to: 'config.yml' },
             ]),
         ],
 

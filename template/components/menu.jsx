@@ -12,9 +12,9 @@ import { setMenuOpen } from '../store';
     }),
 )
 
-export default class Menu extends Component {
+export class Menu extends Component {
     static propTypes = {
-        visible: PropTypes.bool.isRequired,
+        visible: PropTypes.bool,
         closeMenu: PropTypes.func.isRequired,
     }
 
@@ -38,3 +38,5 @@ export default class Menu extends Component {
         )
     }
 }
+
+export default Menu;
