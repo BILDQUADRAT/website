@@ -14,6 +14,7 @@ collections: # A list of collections the CMS should be able to edit
         label: Startseite
         name: home
         fields:
+          - {label: URL, name: url, widget: hidden, default: "/"}
           - {label: Title, name: title, widget: string}
           - label: Banner
             name: banner
