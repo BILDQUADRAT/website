@@ -16,7 +16,7 @@ export const PreviewProvider = WrappedComponent => {
                 return null;
             }
 
-            const content = this.props.entry.get('data').toObject();
+            const content = this.props.entry.get('data').toJS();
             return <WrappedComponent content={content} />;
         }
     }

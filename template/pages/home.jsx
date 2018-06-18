@@ -12,12 +12,12 @@ export class HomePage extends React.Component {
 
     render () {
         const {
-            banner_headline, banner_subheader, banner_cta
+            banner
         } = this.props.content;
 
         return (
             <PageBase>
-                <Banner content={{ banner_headline, banner_subheader, banner_cta }}/>
+                <Banner banner={banner}/>
                 <div id="main">
                     <TileSection id="one">
                         <CollectionRepeater name="sections">
