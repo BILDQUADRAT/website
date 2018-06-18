@@ -36,8 +36,8 @@ async function getCollections() {
     const pages = await Promise.all(collections.map(async col => {
         const files = (await fs.readdir(rootPath(col.folder), 'utf-8')).filter(file => file.endsWith('.yml'));
         return Promise.all(files.map(async filePath => {
-            const fullPath = path.join(col.folder, filePath);
-            const fileContent = await loadYamlFile(rootPath(fullPath));
+            const fullPath = path.relative(contentPath(), rootPath(path.join(col.folder, filePath)));
+            const fileContent = await loadYamlFile(contentPath(fullPath));
             const url = makeUrl(fileContent, filePath, col);
             return {
                 url,
