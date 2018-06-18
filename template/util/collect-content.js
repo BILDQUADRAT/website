@@ -20,7 +20,7 @@ async function loadContentFile(filepath) {
 }
 
 function makeUrl(page, filePath, col = null) {
-    const baseUrl = page.slug || page.title ? slugify(page.title) : filePath.substr(0, -4);
+    const baseUrl = page.url || page.slug || (page.title ? slugify(page.title) : filePath.substr(0, -4));
 
     return path.normalize(path.join(
         '/',
