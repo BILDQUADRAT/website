@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createBrowserHistory, createMemoryHistory } from 'history';
-import { setConfig, setCollections } from './store';
-import ExecutionEnvironment from 'exenv';
+import { safeLoad } from 'js-yaml';
+
+import { setConfig, setCollections, setContent } from './store';
 
 @connect(
     state => ({
         content: state.content,
     }),
     dispatch => ({
-        setConfig: config => dispatch(setConfig(config)),
         setCollections: collections => dispatch(setCollections(collections)),
+        setConfig: config => dispatch(setConfig(config)),
+        setContent: content => dispatch(setContent(content)),
     })
 )
 export class TemplateRouter extends Component {
@@ -21,8 +22,9 @@ export class TemplateRouter extends Component {
         location: PropTypes.shape({
             pathname: PropTypes.string.isRequired,
         }).isRequired,
-        setConfig: PropTypes.func.isRequired,
         setCollections: PropTypes.func.isRequired,
+        setConfig: PropTypes.func.isRequired,
+        setContent: PropTypes.func.isRequired,
     }
 
     constructor (props) {
@@ -92,7 +94,17 @@ export class TemplateRouter extends Component {
         const { element, page } = this.pageElementFromCache();
         if (element) {
             this.setState({ pageElement: element });
-            return;
+        }
+
+        if (page) {
+            if (page.content) {
+                this.props.setContent(page.content);
+            } else {
+                const contentRes = await fetch(`/content/${page.path}`);
+                if (contentRes.ok) {
+                    this.props.setContent(safeLoad(await contentRes.text()));
+                }
+            }
         }
 
         //const element = await import()
