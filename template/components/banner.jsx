@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+export const SHAPE_BANNER = {
+    headline: PropTypes.string.isRequired,
+    subheader: PropTypes.string.isRequired,
+    cta: PropTypes.string.isRequired,
+    image: PropTypes.image,
+};
+
 export class Banner extends Component {
     static propTypes = {
-        banner: PropTypes.shape({
-            headline: PropTypes.string.isRequired,
-            subheader: PropTypes.string.isRequired,
-            cta: PropTypes.string.isRequired,
-            image: PropTypes.image,
-        }),
+        banner: PropTypes.shape(SHAPE_BANNER),
     }
 
     static defaultProps = {

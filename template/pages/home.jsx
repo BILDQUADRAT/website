@@ -1,5 +1,5 @@
 import React from 'react';
-import { Banner } from '../components/banner';
+import { Banner, SHAPE_BANNER } from '../components/banner';
 import PageBase from '../components/pagebase';
 import PropTypes from 'prop-types';
 import { CollectionRepeater } from '../util/collection-repeater';
@@ -7,7 +7,9 @@ import { TileSection, Tile } from '../components/tiles';
 
 export class HomePage extends React.Component {
     static propTypes = {
-        content: PropTypes.object.isRequired,
+        content: PropTypes.shape({
+            banner: PropTypes.shape(SHAPE_BANNER),
+        }).isRequired,
     }
 
     render () {
