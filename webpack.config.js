@@ -128,6 +128,7 @@ module.exports = (env = {}) => {
                     res.json(content);
                 });
             },
+            historyApiFallback: true,
         }
     }, {
         mode: !isDev ? 'production' : 'development',
