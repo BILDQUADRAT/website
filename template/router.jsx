@@ -71,14 +71,21 @@ export class TemplateRouter extends Component {
             if (pagePath in window.BQ_CONTENT_COMPONENTS.pages) {
                 return {
                     element: window.BQ_CONTENT_COMPONENTS.pages[pagePath],
-                    page
+                    page,
                 };
             }
         }
 
-        return {};
+        if (parts[0] !== 'pages' && window.BQ_CONTENT_COMPONENTS.collections) {
+            if (parts[0] in window.BQ_CONTENT_COMPONENTS.collections) {
+                return {
+                    element: window.BQ_CONTENT_COMPONENTS.collections[parts[0]],
+                    page,
+                }
+            }
+        }
 
-        // collections
+        return {};
     }
 
     async loadPageElement () {
