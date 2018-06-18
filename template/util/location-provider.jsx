@@ -6,6 +6,10 @@ import ExecutionEnvironment from 'exenv';
 export const LocationContext = React.createContext({});
 export const history = ExecutionEnvironment.canUseDOM ? createBrowserHistory() : createMemoryHistory();
 
+if (ExecutionEnvironment.canUseDOM) {
+    window.reactHistory = window.reactHistory || history;
+}
+
 export const LocationProvider = WrappedComponent => {
     class LocationProviderWrapper extends Component {
         static propTypes = {

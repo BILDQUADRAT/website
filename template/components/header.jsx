@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setMenuOpen } from '../store';
 import PropTypes from 'prop-types';
+import Link from '../util/link';
 
 @connect(
     null,
@@ -18,7 +19,7 @@ export class Header extends Component {
     render () {
         return (
             <header id="header" className="alt">
-                <a href="/" className="logo">bildquadrat</a>
+                <Link to="/" className="logo">bildquadrat</Link>
                 <nav>
                     <a href="#menu" onClick={this.props.openMenu}>Menu</a>
                 </nav>

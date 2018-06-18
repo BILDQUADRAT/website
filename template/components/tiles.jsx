@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from '../util/link';
 
 export const Tile = props => (
     <article>
@@ -9,7 +10,9 @@ export const Tile = props => (
             </span>
         ) : null}
         <header className="major">
-            <h3><a href={props.link} className="link">{props.headline}</a></h3>
+            <h3>
+                <Link to={props.link} className="link">{props.headline}</Link>
+            </h3>
             <p>{props.copy}</p>
         </header>
     </article>
