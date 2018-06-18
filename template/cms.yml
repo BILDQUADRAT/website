@@ -22,6 +22,7 @@ collections: # A list of collections the CMS should be able to edit
               - {label: Überschrift, name: headline, widget: string}
               - {label: Untertitel, name: subheader, widget: string}
               - {label: Button, name: cta, widget: string}
+              - {label: Hintergrundbild, name: image, widget: image}
 
   - name: sections
     label: Sections

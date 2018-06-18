@@ -7,13 +7,18 @@ export class Banner extends Component {
             headline: PropTypes.string.isRequired,
             subheader: PropTypes.string.isRequired,
             cta: PropTypes.string.isRequired,
+            image: PropTypes.image,
         }),
+    }
+
+    static defaultProps = {
+        image: false,
     }
 
     render() {
         const { headline, subheader, cta, image } = this.props.banner;
         return (
-            <section id="banner" className="major">
+            <section id="banner" className="major" style={image ? {backgroundImage: `url(${image})`} : {}}>
                 <div className="inner">
                     <header className="major">
                         <h1>{headline}</h1>
