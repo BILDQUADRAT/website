@@ -13,7 +13,7 @@ export class App extends Component {
             }
 
             netlifyIdentity.on("login", () => {
-                window.location.href = '/admin/';
+                window.location.href = '/cms/';
             });
         });
         netlifyIdentity.init();
