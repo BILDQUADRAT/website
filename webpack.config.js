@@ -215,7 +215,7 @@ module.exports = (env = {}) => {
                     }
                 }
             },
-            minimizer: isDev ? false : [
+            minimizer: isDev ? [] : [
                 new UglifyJsPlugin({
                     exclude: /cmsBase\.js/,
                 })
