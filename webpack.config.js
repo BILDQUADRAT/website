@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 require("@babel/register");
 require("@babel/polyfill");
@@ -191,7 +192,7 @@ module.exports = (env = {}) => {
 
             new HtmlWebpackPlugin({
                 inject: 'body',
-                chunks: ['cms'],
+                chunks: ['cmsBase', 'cms'],
                 title: 'Netlify CMS',
                 filename: 'index.html',
                 hash: true,
@@ -201,6 +202,25 @@ module.exports = (env = {}) => {
                 { from: 'template/cms.yml', to: 'config.yml' },
             ]),
         ],
+
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        test: /node_modules\/netlify-cms/,
+                        chunks: "initial",
+                        name: "cmsBase",
+                        priority: 10,
+                        enforce: true
+                    }
+                }
+            },
+            minimizer: isDev ? false : [
+                new UglifyJsPlugin({
+                    exclude: /cmsBase\.js/,
+                })
+            ],
+        },
 
         devtool: 'cheap-module-source-map',
     }];
