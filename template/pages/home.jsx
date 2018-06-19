@@ -8,7 +8,7 @@ import { TileSection, Tile } from '../components/tiles';
 export class HomePage extends React.Component {
     static propTypes = {
         content: PropTypes.shape({
-            banner: PropTypes.shape(SHAPE_BANNER),
+            banner: PropTypes.shape(SHAPE_BANNER).isRequired,
         }).isRequired,
     }
 
@@ -19,7 +19,7 @@ export class HomePage extends React.Component {
 
         return (
             <PageBase>
-                <Banner banner={banner}/>
+                <Banner banner={banner} />
                 <div id="main">
                     <TileSection id="one">
                         <CollectionRepeater name="sections">
