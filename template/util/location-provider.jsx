@@ -27,15 +27,17 @@ export const LocationProvider = WrappedComponent => {
                 this.state = {
                     pathname: window.location.pathname || '',
                 };
-
-                history.listen((location, action) => {
-                    this.setState({ pathname: location.pathname });
-                });
             } else {
                 this.state = {
                     pathname: props.preloadedUrl,
                 };
             }
+        }
+
+        componentDidMount () {
+            history.listen((location, action) => {
+                this.setState({ pathname: location.pathname });
+            });
         }
 
         render () {
