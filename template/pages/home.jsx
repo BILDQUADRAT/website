@@ -23,12 +23,13 @@ export class HomePage extends React.Component {
                 <div id="main">
                     <TileSection id="one">
                         <CollectionRepeater name="sections">
-                            {(page, key) => (
+                            {({ content: { teaser = {} } = {}, url }, key) => (
                                 <Tile
                                     key={key}
-                                    headline={page.content.headline}
-                                    copy="Hallo Welt"
-                                    link={page.url}
+                                    headline={teaser.headline}
+                                    copy={teaser.copy}
+                                    image={teaser.image}
+                                    link={url}
                                 />
                             )}
                         </CollectionRepeater>
