@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setMenuOpen } from '../store';
+import { setMenuOpen } from '../store/actions';
 import PropTypes from 'prop-types';
 import Link from '../util/link';
 

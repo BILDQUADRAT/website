@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setMenuOpen } from '../store';
+import { setMenuOpen } from '../store/actions';
 
 @connect(
     state => ({

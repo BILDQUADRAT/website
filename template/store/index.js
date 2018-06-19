@@ -2,37 +2,7 @@ import { createStore, compose } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import ExecutionEnvironment from 'exenv';
 
-const SET_MENU_OPEN = 'SET_MENU_OPEN';
-export function setMenuOpen(isOpen) {
-    return {
-        type: SET_MENU_OPEN,
-        payload: isOpen,
-    }
-}
-
-const SET_CONTENT = 'SET_CONTENT';
-export function setContent(content) {
-    return {
-        type: SET_CONTENT,
-        payload: content,
-    }
-}
-
-const SET_CONFIG = 'SET_CONFIG';
-export function setConfig(config) {
-    return {
-        type: SET_CONFIG,
-        payload: config,
-    }
-}
-
-const SET_COLLECTIONS = 'SET_COLLECTIONS';
-export function setCollections(collections) {
-    return {
-        type: SET_COLLECTIONS,
-        payload: collections,
-    }
-}
+import { Types } from './actions';
 
 export const initialState = {
     menuOpen: false,
@@ -43,22 +13,22 @@ export const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case SET_MENU_OPEN:
+        case Types.SET_MENU_OPEN:
             return {
                 ...state,
                 menuOpen: action.payload,
             }
-        case SET_CONTENT:
+        case Types.SET_CONTENT:
             return {
                 ...state,
                 content: action.payload,
             }
-        case SET_CONFIG:
+        case Types.SET_CONFIG:
             return {
                 ...state,
                 config: action.payload,
             }
-        case SET_COLLECTIONS:
+        case Types.SET_COLLECTIONS:
             return {
                 ...state,
                 collections: action.payload,

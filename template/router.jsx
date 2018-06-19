@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { safeLoad } from 'js-yaml';
 
-import { setConfig, setCollections, setContent } from './store';
+import { setConfig, setCollections, setContent } from './store/actions';
 
 @connect(
     state => ({
