@@ -89,6 +89,7 @@ module.exports = (env = {}) => {
 
             new CopyWebpackPlugin([
                 { from: 'template/assets/', to: '' },
+                { from: 'content/images/', to: 'content/images' },
                 /*
                             { from: 'public/images/', to: 'images/' },
                             { from: 'public/fonts/', to: 'fonts/' },
