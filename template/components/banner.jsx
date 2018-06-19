@@ -11,16 +11,18 @@ export const SHAPE_BANNER = {
 export class Banner extends Component {
     static propTypes = {
         banner: PropTypes.shape(SHAPE_BANNER),
+        className: PropTypes.string,
     }
 
     static defaultProps = {
         image: false,
+        className: "",
     }
 
     render() {
         const { headline, subheader, cta, image } = this.props.banner;
         return (
-            <section id="banner" className="major" style={image ? {backgroundImage: `url(${image})`} : {}}>
+            <section id="banner" className={this.props.className || "major"} style={image ? {backgroundImage: `url(${image})`} : {}}>
                 <div className="inner">
                     <header className="major">
                         <h1>{headline}</h1>
