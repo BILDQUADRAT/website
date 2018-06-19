@@ -6,7 +6,8 @@ import fsBase from 'fs';
 import { safeLoad } from 'js-yaml';
 import { ensureDir } from 'fs-extra';
 
-import store, { setContent } from './template/store';
+import store from './template/store';
+import { setContent } from './template/store/actions';
 import { App } from './template/app';
 import { getContentMap } from './template/util/collect-content';
 import LocationProvider from './template/util/location-provider';
