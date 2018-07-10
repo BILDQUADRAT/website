@@ -50,7 +50,15 @@ collections: # A list of collections the CMS should be able to edit
     create: true
     fields:
       - {label: Title, name: title, widget: string}
-      - {label: Sektion, name: section_relation}
+      - {label: Sektion, name: section_relation, widget: relation, collection: sections}
+      - label: Teaser
+        name: teaser
+        widget: object
+        fields:
+          - {label: Überschrift, name: headline, widget: string}
+          - {label: Text, name: copy, widget: string}
+          - {label: Button, name: cta, widget: string}
+          - {label: Bild, name: image, widget: image}
 
   - name: settings
     label: Site Settings

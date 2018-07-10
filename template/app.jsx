@@ -23,8 +23,8 @@ export class App extends Component {
         return (
             <Provider store={store}>
                 <LocationContext.Consumer>
-                    {locationState => (
-                        <TemplateRouter {...this.props} location={locationState} />
+                    {({location, preloadedComponent}) => (
+                        <TemplateRouter {...this.props} location={location} preloadedComponent={preloadedComponent} />
                     )}
                 </LocationContext.Consumer>
             </Provider>

@@ -14,10 +14,12 @@ export const LocationProvider = WrappedComponent => {
     class LocationProviderWrapper extends Component {
         static propTypes = {
             preloadedUrl: PropTypes.string,
+            preloadedComponent: PropTypes.func,
         }
 
         static defaultProps = {
             preloadedUrl: null,
+            preloadedComponent: null,
         }
 
         constructor(props) {
@@ -42,7 +44,7 @@ export const LocationProvider = WrappedComponent => {
 
         render () {
             return (
-                <LocationContext.Provider value={this.state}>
+                <LocationContext.Provider value={{ location: this.state, preloadedComponent: this.props.preloadedComponent }}>
                     <WrappedComponent />
                 </LocationContext.Provider>
             )

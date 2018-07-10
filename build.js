@@ -11,6 +11,7 @@ import { setContent } from './template/store/actions';
 import { App } from './template/app';
 import { getContentMap } from './template/util/collect-content';
 import LocationProvider from './template/util/location-provider';
+import { getPageComponent } from './template/util/page-component';
 
 const fs = fsBase.promises;
 
@@ -29,8 +30,15 @@ class StaticRenderer {
     async renderSinglePage({ url, path: filepath, content }) {
         store.dispatch(setContent(content));
 
+        let pageComponent = null;
+        try {
+            pageComponent = require('./template/'.concat(getPageComponent(filepath))).default;
+        } catch(e) {
+            return;
+        }
+
         const html = renderToString(
-            <ServerApp preloadedUrl={url} />
+            <ServerApp preloadedUrl={url} preloadedComponent={pageComponent} />
         );
 
         // prepare Redux preloaded state
