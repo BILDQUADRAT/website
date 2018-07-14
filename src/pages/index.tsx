@@ -19,7 +19,7 @@ interface IndexPageData {
   fileQuery: {
     edges: Array<{
       node: {
-        childPagesYaml: IndexPageContent;
+        childPagesYamlRel: IndexPageContent;
       };
     }>;
   };
@@ -33,7 +33,7 @@ const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
   if (data.fileQuery.edges.length < 1) {
     return null;
   }
-  const { banner } = data.fileQuery.edges[0].node.childPagesYaml;
+  const { banner } = data.fileQuery.edges[0].node.childPagesYamlRel;
   return (
     <>
       {<Banner banner={banner} />}
@@ -53,7 +53,7 @@ export const query = graphql`
     edges {
       node {
         name
-        childPagesYaml {
+        childPagesYamlRel {
           title
           banner {
             headline
