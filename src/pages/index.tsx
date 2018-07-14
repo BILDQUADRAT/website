@@ -3,15 +3,14 @@ import React from 'react';
 
 import { Banner } from '../components/banner';
 import withLayout from '../components/layout';
+import { ImageFile } from '../types';
 
 interface IndexPageContent {
   banner: {
     headline: string;
     subheader: string;
     cta: string;
-    image: {
-      publicURL: string;
-    };
+    image: ImageFile;
   };
 }
 
