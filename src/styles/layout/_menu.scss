@@ -145,7 +145,7 @@
 		}
 	}
 
-	body.menu-visible .bq-root {
+	body.menu-visible .main-wrapper {
 		@include vendor('filter', 'blur(0.5em)');
 	}
 
