@@ -49,7 +49,7 @@ class Header extends Component<HeaderProps, HeaderState> {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <header id="header" className="alt">
           <Link to="/" className="logo">bildquadrat</Link>
           <nav>
@@ -57,7 +57,7 @@ class Header extends Component<HeaderProps, HeaderState> {
           </nav>
         </header>
         <Menu visible={this.state.menuOpen} onCloseMenu={this.closeMenu} />
-      </React.Fragment>
+      </>
     );
   }
 }

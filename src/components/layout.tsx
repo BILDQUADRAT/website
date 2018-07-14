@@ -18,7 +18,7 @@ interface LayoutProps {
 }
 
 const render = (children: React.ReactNode) => (data: LayoutData) => (
-  <React.Fragment>
+  <>
     <Helmet
       title={data.site.siteMetadata.title}
       meta={[
@@ -28,7 +28,7 @@ const render = (children: React.ReactNode) => (data: LayoutData) => (
     />
     <Header siteTitle={data.site.siteMetadata.title} />
     {children}
-  </React.Fragment>
+  </>
 );
 
 const LayoutComponent: React.SFC<LayoutProps> = ({ children }) => (
