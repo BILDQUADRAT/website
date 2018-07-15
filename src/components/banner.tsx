@@ -1,15 +1,12 @@
-import Img from 'gatsby-image';
-import React, { Component } from 'react';
+import React from 'react';
 
-import { SharpFluidImage } from '../types';
-
-import BgImage from './bg-image';
+import { BgImage, ImageSources } from './image';
 
 interface BannerData {
   headline: string;
   subheader: string;
   cta: string;
-  image: SharpFluidImage;
+  image: ImageSources;
 }
 
 interface BannerProps {
@@ -24,7 +21,7 @@ export const Banner: React.SFC<BannerProps> = props => {
       id="banner"
       className={props.className || "major"}
     >
-      <BgImage fluid={image.childImageSharp.fluid} />
+      <BgImage imageSources={image} />
       <div className="inner">
         <header className="major">
           <h1>{headline}</h1>

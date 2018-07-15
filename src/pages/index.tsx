@@ -1,17 +1,18 @@
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import React from 'react';
 
 import { Banner } from '../components/banner';
+import { ImageSources } from '../components/image';
 import withLayout from '../components/layout';
 import { showTiles } from '../components/tiles';
-import { GraphQLNodes, ImageFile, SharpFluidImage } from '../types';
+import { GraphQLNodes } from '../types';
 
 interface IndexPageContent {
   banner: {
     headline: string;
     subheader: string;
     cta: string;
-    image: SharpFluidImage;
+    image: ImageSources;
   };
 }
 
@@ -20,7 +21,7 @@ interface SectionContent {
   teaser: {
     headline: string;
     copy: string;
-    image: SharpFluidImage;
+    image: ImageSources;
   };
   fields: {
     url: string;
@@ -76,6 +77,9 @@ export const query = graphql`
             cta
             image {
               childImageSharp {
+                sqip(numberOfPrimitives: 20) {
+                  dataURI
+                }
                 fluid(maxWidth: 1000) {
                   ...GatsbyImageSharpFluid
                 }
@@ -100,6 +104,9 @@ export const query = graphql`
             copy
             image {
               childImageSharp {
+                sqip(numberOfPrimitives: 10) {
+                  dataURI
+                }
                 fluid(maxWidth: 600) {
                   ...GatsbyImageSharpFluid
                 }

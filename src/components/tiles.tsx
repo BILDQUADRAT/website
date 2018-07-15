@@ -1,12 +1,10 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
-import { SharpFluidImage } from '../types';
-
-import BgImage from './bg-image';
+import { BgImage, ImageSources } from './image';
 
 interface TileProps {
-  image?: SharpFluidImage;
+  image?: ImageSources;
   url: string;
   headline: string;
   copy?: string;
@@ -14,7 +12,7 @@ interface TileProps {
 
 export const Tile: React.SFC<TileProps> = (props: TileProps) => (
   <article>
-    {props.image && <BgImage fluid={props.image.childImageSharp.fluid} />}
+    {props.image && <BgImage imageSources={props.image} />}
     <header className="major">
       <h3>
         <Link to={props.url} className="link">{props.headline}</Link>

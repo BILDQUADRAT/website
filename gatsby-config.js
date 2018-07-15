@@ -15,6 +15,7 @@ module.exports = {
       },
     },
     'gatsby-transformer-sharp',
+    'gatsby-transformer-sqip',
     'gatsby-plugin-sharp',
     'gatsby-plugin-netlify',
     'gatsby-plugin-netlify-cache',
