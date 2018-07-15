@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Banner } from '../components/banner';
 import withLayout from '../components/layout';
-import { ImageFile } from '../types';
+import { GraphQLNodes, ImageFile } from '../types';
 
 interface IndexPageContent {
   banner: {
@@ -15,13 +15,9 @@ interface IndexPageContent {
 }
 
 interface IndexPageData {
-  fileQuery: {
-    edges: Array<{
-      node: {
-        childContentPages: IndexPageContent;
-      };
-    }>;
-  };
+  fileQuery: GraphQLNodes<{
+    childContentPages: IndexPageContent;
+  }>;
 }
 
 interface IndexPageProps {
