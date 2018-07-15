@@ -61,10 +61,3 @@
     @return url("data:image/svg+xml;charset=utf8,#{$svg}");
 
 }
-
-@mixin gatsby-bg-image {
-    position: absolute !important;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-}

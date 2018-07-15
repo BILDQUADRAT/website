@@ -12,6 +12,6 @@ export interface GraphQLNodes<T> {
 
 export interface SharpFluidImage {
   childImageSharp: {
-    fluid: GatsbyImageProps;
+    fluid: object;
   };
 }

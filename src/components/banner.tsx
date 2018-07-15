@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 import { SharpFluidImage } from '../types';
 
+import BgImage from './bg-image';
+
 interface BannerData {
   headline: string;
   subheader: string;
@@ -22,7 +24,7 @@ export const Banner: React.SFC<BannerProps> = props => {
       id="banner"
       className={props.className || "major"}
     >
-      <Img fluid={image.childImageSharp.fluid} outerWrapperClassName="bannerBackground" />
+      <BgImage fluid={image.childImageSharp.fluid} />
       <div className="inner">
         <header className="major">
           <h1>{headline}</h1>
