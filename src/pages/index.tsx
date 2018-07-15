@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Banner } from '../components/banner';
 import withLayout from '../components/layout';
+import { showTiles } from '../components/tiles';
 import { GraphQLNodes, ImageFile } from '../types';
 
 interface IndexPageContent {
@@ -14,9 +15,21 @@ interface IndexPageContent {
   };
 }
 
+interface SectionContent {
+  id: string;
+  teaser: {
+    headline: string;
+    copy: string;
+    image: ImageFile;
+  };
+}
+
 interface IndexPageData {
   fileQuery: GraphQLNodes<{
     childContentPages: IndexPageContent;
+  }>;
+  sectionsQuery: GraphQLNodes<{
+    childContentSections: SectionContent;
   }>;
 }
 
@@ -29,9 +42,15 @@ const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
     return null;
   }
   const { banner } = data.fileQuery.edges[0].node.childContentPages;
+  const sections = data.sectionsQuery.edges;
   return (
     <>
-      {<Banner banner={banner} />}
+      <Banner banner={banner} />
+      {showTiles(sections.map(({ node }) => ({
+        ...node.childContentSections.teaser,
+        key: node.childContentSections.id,
+        url: '',
+      })))}
     </>
   );
 };
@@ -54,6 +73,26 @@ export const query = graphql`
             headline
             subheader
             cta
+            image {
+              publicURL
+            }
+          }
+        }
+      }
+    }
+  }
+  sectionsQuery: allFile(
+    filter: {
+      relativeDirectory: { eq: "sections" }
+    }
+  ) {
+    edges {
+      node {
+        childContentSections {
+          id
+          teaser {
+            headline
+            copy
             image {
               publicURL
             }
