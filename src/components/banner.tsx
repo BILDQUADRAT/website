@@ -1,12 +1,13 @@
+import Img from 'gatsby-image';
 import React, { Component } from 'react';
+
+import { SharpFluidImage } from '../types';
 
 interface BannerData {
   headline: string;
   subheader: string;
   cta: string;
-  image: {
-    publicURL: string;
-  };
+  image: SharpFluidImage;
 }
 
 interface BannerProps {
@@ -20,8 +21,8 @@ export const Banner: React.SFC<BannerProps> = props => {
     <section
       id="banner"
       className={props.className || "major"}
-      style={image ? { backgroundImage: `url(${image.publicURL})` } : {}}
     >
+      <Img fluid={image.childImageSharp.fluid} outerWrapperClassName="bannerBackground" />
       <div className="inner">
         <header className="major">
           <h1>{headline}</h1>

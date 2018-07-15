@@ -4,14 +4,14 @@ import React from 'react';
 import { Banner } from '../components/banner';
 import withLayout from '../components/layout';
 import { showTiles } from '../components/tiles';
-import { GraphQLNodes, ImageFile } from '../types';
+import { GraphQLNodes, ImageFile, SharpFluidImage } from '../types';
 
 interface IndexPageContent {
   banner: {
     headline: string;
     subheader: string;
     cta: string;
-    image: ImageFile;
+    image: SharpFluidImage;
   };
 }
 
@@ -20,7 +20,7 @@ interface SectionContent {
   teaser: {
     headline: string;
     copy: string;
-    image: ImageFile;
+    image: SharpFluidImage;
   };
   fields: {
     url: string;
@@ -75,7 +75,11 @@ export const query = graphql`
             subheader
             cta
             image {
-              publicURL
+              childImageSharp {
+                fluid(maxWidth: 1000) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
         }
@@ -95,7 +99,11 @@ export const query = graphql`
             headline
             copy
             image {
-              publicURL
+              childImageSharp {
+                fluid(maxWidth: 600) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
           fields {
