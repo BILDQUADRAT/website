@@ -66,9 +66,7 @@ export const query = graphql`
   ) {
     edges {
       node {
-        name
         childContentPages {
-          title
           banner {
             headline
             subheader
