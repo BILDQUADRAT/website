@@ -22,6 +22,9 @@ interface SectionContent {
     copy: string;
     image: ImageFile;
   };
+  fields: {
+    url: string;
+  };
 }
 
 interface IndexPageData {
@@ -49,7 +52,7 @@ const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
       {showTiles(sections.map(({ node }) => ({
         ...node.childContentSections.teaser,
         key: node.childContentSections.id,
-        url: '',
+        url: node.childContentSections.fields.url,
       })))}
     </>
   );
@@ -94,6 +97,9 @@ export const query = graphql`
             image {
               publicURL
             }
+          }
+          fields {
+            url
           }
         }
       }
