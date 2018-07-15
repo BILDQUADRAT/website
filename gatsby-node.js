@@ -31,7 +31,7 @@ exports.onCreateNode = ({ node, actions: { createNode, createParentChildLink }, 
       parent: fileNode.id,
       internal: {
         contentDigest: node.internal.contentDigest,
-        type: `${node.internal.type}Rel`,
+        type: `Content${node.internal.type.replace('Yaml', '')}`,
       },
     };
     createNode(relNode);
