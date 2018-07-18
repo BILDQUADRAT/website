@@ -10,10 +10,10 @@ import Header from './header';
 interface LayoutProps {
 }
 
-const render = (children: React.ReactNode) => (data: LayoutMetadata) => (
+const render = (children: React.ReactNode) => (data: LayoutMetadata) => data && data.site && data.site.siteMetadata && (
   <>
     <Helmet
-      title={data.site!.siteMetadata!.title || ''}
+      title={data.site.siteMetadata.title || ''}
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' },
