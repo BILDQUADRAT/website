@@ -1,4 +1,7 @@
 const path = require('path');
+const childProcess = require('child_process');
+const request = require('request-promise-native');
+const delay = require('delay');
 
 function transformPaths(node, path) {
   const segmentCount = path.split('/').length - 1;
@@ -61,4 +64,38 @@ exports.onCreateNode = ({ node, actions: { createNode, createNodeField, createPa
       });
     }
   }
+}
+
+const maxRetries = 4
+const codegenCommand = 'apollo codegen:generate --queries={src/**/*.tsx,.cache/fragments/*.js} --schema=http://localhost:8000/___graphql --tagName=graphql --target=typescript --watch'
+exports.onPostBootstrap = ({ store }) => {
+  const { program } = store.getState();
+  if (!program._.includes('develop')) {
+    return;
+  }
+
+  (async () => {
+    let remainingRetries = maxRetries;
+    while(remainingRetries > 0) {
+      const delaytime = (maxRetries - remainingRetries + 1) * 1500;
+      await delay(delaytime);
+      try {
+        await request({
+          uri: 'http://localhost:8000/___graphql?query=',
+          headers: {
+            'Accept': 'text/html',
+          },
+        });
+        console.log('Starting Apollo Codegen in watch-mode...');
+        const codegen = childProcess.spawn(codegenCommand, { shell: true });
+        codegen.stdout.pipe(process.stdout);
+        return;
+      } catch(e) {
+        remainingRetries--;
+        if (remainingRetries <= 0) {
+          console.warn("Could not contact GraphQL server:", e.message);
+        }
+      }
+    }
+  })();
 }
