@@ -3,26 +3,23 @@ import React from 'react';
 
 import withLayout from '../components/layout';
 
-interface SectionData {
-  contentSections: {
-    title: string;
-    teaser: {
-      copy: string;
-      headline: string;
-    };
-  };
-}
+import { SectionsData } from './__generated__/SectionsData';
 
 interface SectionTemplateProps {
-  data: SectionData;
+  data: SectionsData;
 }
 
-const SectionTemplate: React.SFC<SectionTemplateProps> = ({ data }: SectionTemplateProps) => (
-  <h1>{data.contentSections.title}</h1>
-);
+const SectionTemplate: React.SFC<SectionTemplateProps> = ({ data }: SectionTemplateProps) => {
+  if (!data || !data.contentSections) {
+    return null;
+  }
+  return (
+    <h1>{data.contentSections.title}</h1>
+  );
+};
 
 export const query = graphql`
-  query($id: String!) {
+  query SectionsData($id: String!) {
     contentSections(id: { eq: $id }) {
       title
       teaser {

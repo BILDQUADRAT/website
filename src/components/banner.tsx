@@ -3,25 +3,28 @@ import React from 'react';
 import { BgImage, ImageSources } from './image';
 
 interface BannerData {
-  headline: string;
-  subheader: string;
-  cta: string;
-  image: ImageSources;
+  headline: string | null;
+  subheader: string | null;
+  cta: string | null;
+  image: ImageSources | null;
 }
 
 interface BannerProps {
-  banner: BannerData;
+  banner: BannerData | null;
   className?: string;
 }
 
 export const Banner: React.SFC<BannerProps> = props => {
+  if (!props.banner) {
+    return null;
+  }
   const { headline, subheader, cta, image } = props.banner;
   return (
     <section
       id="banner"
       className={props.className || "major"}
     >
-      <BgImage imageSources={image} />
+      {image && <BgImage imageSources={image} />}
       <div className="inner">
         <header className="major">
           <h1>{headline}</h1>

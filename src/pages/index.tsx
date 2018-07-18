@@ -2,65 +2,39 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import { Banner } from '../components/banner';
-import { ImageSources } from '../components/image';
 import withLayout from '../components/layout';
-import { showTiles } from '../components/tiles';
-import { GraphQLNodes } from '../types';
+import { showTiles, TileProps } from '../components/tiles';
 
-interface IndexPageContent {
-  banner: {
-    headline: string;
-    subheader: string;
-    cta: string;
-    image: ImageSources;
-  };
-}
-
-interface SectionContent {
-  id: string;
-  teaser: {
-    headline: string;
-    copy: string;
-    image: ImageSources;
-  };
-  fields: {
-    url: string;
-  };
-}
-
-interface IndexPageData {
-  fileQuery: GraphQLNodes<{
-    childContentPages: IndexPageContent;
-  }>;
-  sectionsQuery: GraphQLNodes<{
-    childContentSections: SectionContent;
-  }>;
-}
+import { IndexData } from './__generated__/IndexData';
 
 interface IndexPageProps {
-  data: IndexPageData;
+  data: IndexData;
 }
 
 const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
-  if (data.fileQuery.edges.length < 1) {
+  if (data.fileQuery!.edges!.length < 1) {
     return null;
   }
-  const { banner } = data.fileQuery.edges[0].node.childContentPages;
-  const sections = data.sectionsQuery.edges;
+  const { banner } = data.fileQuery!.edges![0]!.node!.childContentPages!;
+  const sections = data.sectionsQuery!.edges;
   return (
     <>
-      <Banner banner={banner} />
-      {showTiles(sections.map(({ node }) => ({
-        ...node.childContentSections.teaser,
-        key: node.childContentSections.id,
-        url: node.childContentSections.fields.url,
-      })))}
+      {banner && <Banner banner={banner} />}
+      {showTiles(sections!.map((edge): TileProps => {
+        const { node } = edge!;
+        // tslint:disable:no-object-literal-type-assertion
+        return {
+          ...node!.childContentSections!.teaser!,
+          key: node!.childContentSections!.id,
+          url: node!.childContentSections!.fields!.url,
+        } as TileProps;
+      }))}
     </>
   );
 };
 
 export const query = graphql`
-{
+query IndexData {
 	fileQuery: allFile(
     limit: 1,
     filter: {

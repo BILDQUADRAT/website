@@ -4,29 +4,22 @@ import Helmet from 'react-helmet';
 
 import '../styles/main.scss';
 
+import { LayoutMetadata } from './__generated__/LayoutMetadata';
 import Header from './header';
-
-interface LayoutData {
-  site: {
-    siteMetadata: {
-      title: string;
-    };
-  };
-}
 
 interface LayoutProps {
 }
 
-const render = (children: React.ReactNode) => (data: LayoutData) => (
+const render = (children: React.ReactNode) => (data: LayoutMetadata) => (
   <>
     <Helmet
-      title={data.site.siteMetadata.title}
+      title={data.site!.siteMetadata!.title || ''}
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' },
       ]}
     />
-    <Header siteTitle={data.site.siteMetadata.title} />
+    <Header siteTitle={data.site!.siteMetadata!.title || ''} />
     {children}
   </>
 );

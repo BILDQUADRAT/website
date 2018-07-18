@@ -3,12 +3,12 @@ import React from 'react';
 
 export interface ImageSources {
   childImageSharp: {
-    fluid?: object;
-    fixed?: object;
+    fluid?: object | null;
+    fixed?: object | null;
     sqip?: {
-      dataURI?: string;
-    }
-  };
+      dataURI?: string | null;
+    } | null
+  } | null;
 }
 
 export interface ImageProps extends GatsbyImageProps {
@@ -16,7 +16,7 @@ export interface ImageProps extends GatsbyImageProps {
 }
 
 function maybeInsertSqip({ childImageSharp }: ImageSources) {
-  if (!(childImageSharp.sqip && childImageSharp.sqip.dataURI)) {
+  if (!(childImageSharp && childImageSharp.sqip && childImageSharp.sqip.dataURI)) {
     return { childImageSharp };
   }
   if (!!childImageSharp.fluid) {
@@ -47,9 +47,11 @@ function maybeInsertSqip({ childImageSharp }: ImageSources) {
 export const Image: React.SFC<ImageProps> = ({ imageSources, ...extraProps }: ImageProps) => {
   const image = maybeInsertSqip(imageSources);
   return (
-    !!image.childImageSharp.fluid
+    image.childImageSharp && image.childImageSharp.fluid
       ? <Img fluid={image.childImageSharp.fluid} {...extraProps} />
-      : <Img fixed={image.childImageSharp.fixed} {...extraProps} />
+      : image.childImageSharp && image.childImageSharp.fixed
+        ? <Img fixed={image.childImageSharp.fixed} {...extraProps} />
+        : null
   );
 };
 
