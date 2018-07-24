@@ -1,3 +1,4 @@
+import { graphql } from 'gatsby';
 import Img, { GatsbyImageProps } from 'gatsby-image';
 import React from 'react';
 
@@ -14,6 +15,19 @@ export interface ImageSources {
 export interface ImageProps extends GatsbyImageProps {
   imageSources: ImageSources;
 }
+
+export const defaultImage = graphql`
+  fragment DefaultImageLarge on File {
+    childImageSharp {
+      sqip(numberOfPrimitives: 20) {
+        dataURI
+      }
+      fluid(maxWidth: 1000) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+`;
 
 function maybeInsertSqip({ childImageSharp }: ImageSources) {
   if (!(childImageSharp && childImageSharp.sqip && childImageSharp.sqip.dataURI)) {

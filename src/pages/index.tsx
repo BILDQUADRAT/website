@@ -35,7 +35,7 @@ const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
 
 export const query = graphql`
 query IndexData {
-	fileQuery: allFile(
+  fileQuery: allFile(
     limit: 1,
     filter: {
       relativeDirectory: { eq: "pages" }
@@ -50,14 +50,7 @@ query IndexData {
             subheader
             cta
             image {
-              childImageSharp {
-                sqip(numberOfPrimitives: 20) {
-                  dataURI
-                }
-                fluid(maxWidth: 1000) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
+              ...DefaultImageLarge
             }
           }
         }
