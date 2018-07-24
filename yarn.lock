@@ -8583,6 +8583,10 @@ optimist@^0.6.1:
     minimist "~0.0.1"
     wordwrap "~0.0.2"
 
+optional-chain@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/optional-chain/-/optional-chain-0.1.1.tgz#41c01612e39b27596a98b98f8f00b9fc1790efda"
+
 optionator@^0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.2.tgz#364c5e409d3f4d6301d6c0b4c05bba50180aeb64"

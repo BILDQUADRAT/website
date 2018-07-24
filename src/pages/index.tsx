@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby';
+import { optional } from "optional-chain";
 import React from 'react';
 
 import { Banner } from '../components/banner';
@@ -12,10 +13,11 @@ interface IndexPageProps {
 }
 
 const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
-  if (data.fileQuery!.edges!.length < 1) {
+  const content = optional(data).k('fileQuery').k('edges').i(0).k('node').k('childContentPages').get();
+  if (!content) {
     return null;
   }
-  const { banner } = data.fileQuery!.edges![0]!.node!.childContentPages!;
+  const { banner } = content;
   const sections = data.sectionsQuery!.edges;
   return (
     <>
