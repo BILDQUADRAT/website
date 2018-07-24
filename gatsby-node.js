@@ -7,13 +7,23 @@ function transformPaths(node, path) {
   const segmentCount = path.split('/').length - 1;
   const pathPrefix = segmentCount === 0 ? './' : Array(segmentCount).fill('../').join('');
   const transformer = (obj) => {
+    if (Array.isArray(obj)) {
+      return obj.map(item => {
+        if (typeof item === 'object' && item !== null) {
+          return transformer(item);
+        } else if (typeof item === 'string' && item.startsWith('/content/')) {
+          return item.replace(/^\/content\//, pathPrefix);
+        }
+        return item;
+      });
+    }
     return Object.entries(obj).reduce((acc, [key, val]) => {
       if (['internal', 'children', 'parent'].includes(key)) {
         return acc;
       }
 
       let newVal = val;
-      if (typeof val === 'object') {
+      if (typeof val === 'object' && val !== null) {
         newVal = transformer(val);
       } else if (typeof val === 'string' && val.startsWith('/content/')) {
         newVal = val.replace(/^\/content\//, pathPrefix);
