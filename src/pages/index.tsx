@@ -4,9 +4,9 @@ import React from 'react';
 
 import { Banner } from '../components/banner';
 import withLayout from '../components/layout';
-import { showTiles, TileProps } from '../components/tiles';
+import { showTiles } from '../components/tiles';
 
-import { IndexData } from './__generated__/IndexData';
+import { IndexData, IndexData_fileQuery_edges_node_childContentPages_tiles } from './__generated__/IndexData';
 
 interface IndexPageProps {
   data: IndexData;
@@ -17,20 +17,17 @@ const IndexPage: React.SFC<IndexPageProps> = ({ data }: IndexPageProps) => {
   if (!content) {
     return null;
   }
-  const { banner } = content;
-  const sections = data.sectionsQuery!.edges;
+  const { banner, tiles } = content;
   return (
     <>
       {banner && <Banner banner={banner} />}
-      {showTiles(sections!.map((edge): TileProps => {
-        const { node } = edge!;
-        // tslint:disable:no-object-literal-type-assertion
-        return {
-          ...node!.childContentSections!.teaser!,
-          key: node!.childContentSections!.id,
-          url: node!.childContentSections!.fields!.url,
-        } as TileProps;
-      }))}
+      {showTiles(tiles.map((tile: IndexData_fileQuery_edges_node_childContentPages_tiles) => ({
+        headline: tile.title,
+        copy: tile.teaser,
+        image: tile.image,
+        key: tile.title,
+        url: '',
+      })))}
     </>
   );
 };
@@ -55,35 +52,12 @@ query IndexData {
               ...DefaultImageLarge
             }
           }
-        }
-      }
-    }
-  }
-  sectionsQuery: allFile(
-    filter: {
-      relativeDirectory: { eq: "sections" }
-    }
-  ) {
-    edges {
-      node {
-        childContentSections {
-          id
-          teaser {
-            headline
-            copy
+          tiles {
+            title
+            teaser
             image {
-              childImageSharp {
-                sqip(numberOfPrimitives: 10) {
-                  dataURI
-                }
-                fluid(maxWidth: 600) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
+              ...DefaultImageLarge
             }
-          }
-          fields {
-            url
           }
         }
       }
