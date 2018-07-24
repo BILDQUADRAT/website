@@ -19,5 +19,12 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-netlify',
     'gatsby-plugin-netlify-cache',
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.ts`,
+        stylesPath: `${__dirname}/src/styles/cms.scss`,
+      },
+    },
   ],
 }
