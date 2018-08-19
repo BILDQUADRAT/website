@@ -1,25 +1,26 @@
 import { Link } from 'gatsby';
 import React from 'react';
-
-import { BgImage, ImageSources } from './image';
+import { BlokData, mapBlocks } from '../util/storyblok';
 
 export interface TileProps {
-  image: ImageSources | null;
-  url: string | null;
-  headline: string | null;
-  copy: string | null;
+  image: string;
+  title: string;
+  teaser: string;
+}
+
+export interface TilesProps {
+  items: BlokData[];
 }
 
 export const Tile: React.SFC<TileProps> = (props: TileProps) => (
-  <article>
-    {props.image && <BgImage imageSources={props.image} />}
+  <article style={{ backgroundImage: `url(${props.image})` }}>
     <header className="major">
       <h3>
-        <Link to={props.url || ''} className="link">{props.headline}</Link>
+        <Link to={''} className="link">{props.title}</Link>
       </h3>
-      <p>{props.copy}</p>
+      <p>{props.teaser}</p>
     </header>
-    <Link to={props.url || ''} className="link primary" />
+    <Link to={''} className="link primary" />
   </article>
 );
 
@@ -27,8 +28,8 @@ export const TileSection = (props: React.HTMLProps<HTMLDivElement>) => (
   <section className="tiles" {...props} />
 );
 
-export const showTiles = (tiles: Array<TileProps | null>, extraProps: React.HTMLProps<HTMLDivElement> = {}) => (
-  <TileSection {...extraProps}>
-    {tiles.map(tile => (tile && <Tile key={tile.url || ''} {...tile} />))}
+export const Tiles = (props: TilesProps) => (
+  <TileSection>
+    {mapBlocks(props.items)}
   </TileSection>
 );

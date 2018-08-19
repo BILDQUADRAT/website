@@ -1,3 +1,15 @@
+let storyblokAccessToken = '';
+if (process && process.env && 'STORYBLOK_ACCESS_TOKEN' in process.env) {
+  storyblokAccessToken = process.env.STORYBLOK_ACCESS_TOKEN;
+} else {
+  try {
+    const envFile = require('./.env');
+    if ('STORYBLOK_ACCESS_TOKEN' in envFile) {
+      storyblokAccessToken = envFile.STORYBLOK_ACCESS_TOKEN;
+    }
+  } catch(e) {}
+}
+
 module.exports = {
   siteMetadata: {
     title: 'BILDQUADRAT',
@@ -6,25 +18,15 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     'gatsby-plugin-typescript',
-    'gatsby-transformer-yaml',
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `content`,
-        path: `${__dirname}/content/`,
-      },
-    },
-    'gatsby-transformer-sharp',
-    'gatsby-transformer-sqip',
-    'gatsby-plugin-sharp',
     'gatsby-plugin-netlify',
     'gatsby-plugin-netlify-cache',
     {
-      resolve: `gatsby-plugin-netlify-cms`,
+      resolve: 'gatsby-source-storyblok',
       options: {
-        modulePath: `${__dirname}/src/cms/cms.ts`,
-        stylesPath: `${__dirname}/src/styles/cms.scss`,
-      },
+        accessToken: storyblokAccessToken,
+        homeSlug: 'home',
+        version: 'draft'
+      }
     },
   ],
 }

@@ -8,3 +8,6 @@ yarn-error.log
 
 # Build directory
 /public/
+
+# Config
+.env.js

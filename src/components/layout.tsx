@@ -39,7 +39,7 @@ const LayoutComponent: React.SFC<LayoutProps> = ({ children }) => (
   />
 );
 
-const withLayout = <P, _>(WrappedComponent: React.ComponentType<P>) => (props: P) => (
+const withLayout = <P, _ = {}>(WrappedComponent: React.ComponentType<P>) => (props: P) => (
   <LayoutComponent>
     <WrappedComponent {...props} />
   </LayoutComponent>
