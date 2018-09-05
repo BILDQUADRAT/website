@@ -22,7 +22,12 @@ export class ContactButton extends React.Component<ContactButtonProps, ContactBu
   render() {
     return (
       <>
-        <a className="button next scrolly" onClick={this.handleOpen}>{this.props.text}</a>
+        <button
+          className="button next scrolly"
+          onClick={this.handleOpen}
+        >
+          {this.props.text}
+        </button>
 
         <Contact
           isOpen={this.state.isOpen}
@@ -39,8 +44,5 @@ export class ContactButton extends React.Component<ContactButtonProps, ContactBu
     this.setState({ isOpen: false });
   }
 
-  private handleOpen = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    ev.preventDefault();
-    this.setState({ isOpen: true });
-  }
+  private handleOpen = () => this.setState({ isOpen: true });
 }
