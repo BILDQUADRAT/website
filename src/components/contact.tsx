@@ -21,6 +21,10 @@ const defaultState: ContactState = {
   name: '',
 };
 
+const encodeFormUrl = (obj: { [k: string]: string }) => Object.keys(obj)
+  .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
+  .join('&');
+
 export class Contact extends React.Component<ContactProps, ContactState> {
   private el: HTMLDivElement | null = null;
 
@@ -69,9 +73,17 @@ export class Contact extends React.Component<ContactProps, ContactState> {
     return (
       <form
         className={`contact ${this.props.isOpen ? 'visible' : ''}`}
+        action=""
+        data-netlify={true}
         name="contact"
         onSubmit={this.handleSubmit}
       >
+        <input
+          type="hidden"
+          name="form-name"
+          value="contact"
+        />
+
         <div className="row gtr-uniform">
           <div className="col-6 col-12-xsmall">
             <input
@@ -130,10 +142,6 @@ export class Contact extends React.Component<ContactProps, ContactState> {
     );
   }
 
-  private getFormUrlEncoded = () => Object.keys(this.state)
-    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(this.state[k])}`)
-    .join('&')
-
   private handleEmailChange = (ev: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ email: ev.target.value })
 
@@ -152,7 +160,10 @@ export class Contact extends React.Component<ContactProps, ContactState> {
     ev.preventDefault();
 
     fetch('/', {
-      body: this.getFormUrlEncoded(),
+      body: encodeFormUrl({
+        'form-name': 'contact',
+        ...this.state,
+      }),
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       method: 'post',
     })
