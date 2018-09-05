@@ -11,37 +11,33 @@ export interface FeatureProps {
   buttons: BlokData[];
   orientation: 'forward' | 'reverse' | '';
 }
-
-export class Feature extends React.Component<FeatureProps> {
-  render() {
-    const { orientation, image, title, copy, buttons } = this.props;
-    return (
-      <section className={`feature ${orientation || ''}`}>
-        <Link to="" className="image" style={{ backgroundImage: `url(${image})` }} />
-        <div className="content">
-          <div className="inner">
-            <header className="major">
-              <h3>{title}</h3>
-            </header>
-            <p><Markdown source={copy} /></p>
-            <ul className="actions">
-              {buttons.map((blok: BlokData) => (
-                <li>
-                  {mapBlock(blok)}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-    )
-  }
+export interface FeaturesAlternatingProps {
+  items: BlokData[];
 }
 
-export class FeaturesAlternating extends React.Component<{ items: BlokData[] }> {
-  render() {
-    return this.props.items.map(
-      (blok: BlokData, i: number) => mapBlock(blok, { orientation: i % 2 == 0 ? 'forward' : 'reverse' })
-    );
-  }
-}
+export const Feature: React.SFC<FeatureProps> = ({ orientation, image, title, copy, buttons }) => (
+  <section className={`feature ${orientation || ''}`}>
+    <Link to="" className="image" style={{ backgroundImage: `url(${image})` }} />
+    <div className="content">
+      <div className="inner">
+        <header className="major">
+          <h3>{title}</h3>
+        </header>
+        <p><Markdown source={copy} /></p>
+        <ul className="actions">
+          {buttons.map((blok: BlokData) => (
+            <li>
+              {mapBlock(blok)}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+);
+
+export const FeaturesAlternating: React.SFC<FeaturesAlternatingProps> = ({ items }) => (
+  <>
+    {items.map((blok, i) => mapBlock(blok, { orientation: i % 2 === 0 ? 'forward' : 'reverse' }))}
+  </>
+);
