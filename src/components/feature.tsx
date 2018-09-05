@@ -5,19 +5,20 @@ import Markdown from 'react-markdown';
 import { mapBlock, BlokData } from '../util/storyblok';
 
 export interface FeatureProps {
-  image: string;
-  title: string;
-  copy: string;
   buttons: BlokData[];
+  copy: string;
+  image: string;
   orientation: 'forward' | 'reverse' | '';
+  title: string;
 }
 export interface FeaturesAlternatingProps {
   items: BlokData[];
 }
 
-export const Feature: React.SFC<FeatureProps> = ({ orientation, image, title, copy, buttons }) => (
+export const Feature: React.SFC<FeatureProps> = ({ buttons, copy, image, orientation, title }) => (
   <section className={`feature ${orientation || ''}`}>
     <Link to="" className="image" style={{ backgroundImage: `url(${image})` }} />
+
     <div className="content">
       <div className="inner">
         <header className="major">
