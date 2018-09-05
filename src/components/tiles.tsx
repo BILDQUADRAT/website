@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
-import { BlokData, mapBlocks } from '../util/storyblok';
+
+import { mapBlocks, BlokData } from '../util/storyblok';
 
 export interface TileProps {
   image: string;

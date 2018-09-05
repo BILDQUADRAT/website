@@ -1,7 +1,5 @@
-import React from 'react';
 import { Link } from 'gatsby';
-
-import { BlokData } from '../util/storyblok';
+import React from 'react';
 
 export interface ButtonProps {
   text: string;

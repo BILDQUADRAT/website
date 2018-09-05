@@ -1,8 +1,8 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 import Markdown from 'react-markdown';
 
-import { BlokData, mapBlock } from '../util/storyblok';
+import { mapBlock, BlokData } from '../util/storyblok';
 
 export interface FeatureProps {
   image: string;
