@@ -26,7 +26,7 @@ export const Feature: React.SFC<FeatureProps> = ({ orientation, image, title, co
         <p><Markdown source={copy} /></p>
         <ul className="actions">
           {buttons.map((blok: BlokData) => (
-            <li>
+            <li key={blok._uid}>
               {mapBlock(blok)}
             </li>
           ))}
