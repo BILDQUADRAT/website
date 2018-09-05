@@ -27,6 +27,7 @@ const encodeFormUrl = (obj: { [k: string]: string }) => Object.keys(obj)
 
 export class Contact extends React.Component<ContactProps, ContactState> {
   private el: HTMLDivElement | null = null;
+  private nameRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   constructor(props: Readonly<ContactProps>) {
     super(props);
@@ -46,6 +47,7 @@ export class Contact extends React.Component<ContactProps, ContactState> {
 
     if (this.props.isOpen) {
       document.body.classList.add('contact-visible');
+      this.nameRef.current && this.nameRef.current.focus();
     } else {
       document.body.classList.remove('contact-visible');
     }
@@ -92,6 +94,7 @@ export class Contact extends React.Component<ContactProps, ContactState> {
               placeholder="Name"
               value={this.state.name}
               onChange={this.handleNameChange}
+              ref={this.nameRef}
             />
           </div>
           <div className="col-6 col-12-xsmall">
