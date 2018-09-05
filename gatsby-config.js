@@ -1,9 +1,5 @@
 require('dotenv-safe').config();
 
-if (!storyblokAccessToken) {
-  throw new Error("Missing storyblok access token.");
-}
-
 module.exports = {
   siteMetadata: {
     title: 'BILDQUADRAT',
