@@ -31,6 +31,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "fix": "tslint -p . --fix",
     "gql-codegen": "apollo codegen:generate \"--queries={src/**/*.tsx,.cache/fragments/*.js}\" --schema=http://localhost:8000/___graphql --tagName=graphql --target=typescript",
     "gql-codegen:watch": "yarn gql-codegen --watch",
     "lint": "tslint -p .",
