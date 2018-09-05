@@ -1,14 +1,4 @@
-let storyblokAccessToken = '';
-if (process && process.env && 'STORYBLOK_ACCESS_TOKEN' in process.env) {
-  storyblokAccessToken = process.env.STORYBLOK_ACCESS_TOKEN;
-} else {
-  try {
-    const envFile = require('./.env');
-    if ('STORYBLOK_ACCESS_TOKEN' in envFile) {
-      storyblokAccessToken = envFile.STORYBLOK_ACCESS_TOKEN;
-    }
-  } catch(e) {}
-}
+require('dotenv-safe').config();
 
 module.exports = {
   siteMetadata: {
@@ -23,7 +13,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-storyblok',
       options: {
-        accessToken: storyblokAccessToken,
+        accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
         homeSlug: 'home',
         version: 'draft'
       }
