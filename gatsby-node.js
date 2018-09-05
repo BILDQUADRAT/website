@@ -33,12 +33,17 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const entries = result.data.allStoryblokEntry.edges;
   entries.forEach(entry => {
+    // Host homepage under / (and not /home)
+    const path = (entry.node.full_slug === 'home')
+      ? '/'
+      : `/${entry.node.full_slug}/`;
+
     createPage({
-      path: `/${entry.node.full_slug}/`,
+      path,
       component: storyblokEntryPath,
       context: {
         story: entry.node
       }
-    })
+    });
   });
 }
