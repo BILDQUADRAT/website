@@ -24,6 +24,7 @@ const withContext = (WrappedComponent: React.ComponentType<StoryblokEntryProps>)
   class StoryblokEntryContext extends React.Component<StoryblokEntryContextProps, StoryblokEntryProps> {
     constructor(props: StoryblokEntryContextProps) {
       super(props);
+
       const story = {
         ...props.pathContext.story,
         content: JSON.parse(props.pathContext.story.content),
