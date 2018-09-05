@@ -22,11 +22,17 @@ export interface BlokData {
   [key: string]: any;
 }
 
-export const mapBlock = (blok: BlokData, extraProps?: any) => blok.component in blocks && (
-  <SbEditable content={blok} key={blok._uid}>
-    {React.createElement(blocks[blok.component], { ...extraProps, ...blok })}
-  </SbEditable>
-);
+export const mapBlock = (blok: BlokData, extraProps?: any) => {
+  if (!(blok.component in blocks)) {
+    return null;
+  }
+
+  return (
+    <SbEditable content={blok} key={blok._uid}>
+      {React.createElement(blocks[blok.component], { ...extraProps, ...blok })}
+    </SbEditable>
+  );
+};
 
 export const mapBlocks = (bloks?: BlokData[], extraProps?: any) => {
   if (!bloks) {
