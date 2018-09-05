@@ -2,7 +2,6 @@ import React from 'react';
 import SbEditable from 'storyblok-react'
 
 import { StoryblokEntry } from '../templates/storyblok-entry';
-import gatsbyConfig from '../../gatsby-config';
 
 declare global {
   interface Window {
@@ -11,15 +10,9 @@ declare global {
 }
 
 const loadStoryblokBridge = function(cb: (ev: Event) => any) {
-  const sbConfig = gatsbyConfig.plugins.find((item: any) => item.resolve === 'gatsby-source-storyblok');
-  if (!sbConfig) {
-    console.warn('Storyblok plugin was not found!');
-    return;
-  }
-
   const script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = `//app.storyblok.com/f/storyblok-latest.js?t=${sbConfig.options.accessToken}`;
+  script.src = `//app.storyblok.com/f/storyblok-latest.js?t=${process.env.STORYBLOK_ACCESS_TOKEN}`;
   script.onload = cb;
   document.body.appendChild(script);
 }

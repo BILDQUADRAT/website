@@ -10,4 +10,4 @@ yarn-error.log
 /public/
 
 # Config
-.env.js
+.env
