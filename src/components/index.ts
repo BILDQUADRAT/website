@@ -3,6 +3,7 @@ import { Story } from "../util/storyblok";
 
 import { Banner } from "./banner";
 import Button from "./button";
+import { ContactButton } from "./contact-button";
 import { Feature, FeaturesAlternating } from "./feature";
 import { Tile, Tiles } from "./tiles";
 
@@ -21,6 +22,7 @@ export const contentTypes: ComponentMap<ContentTypeProps> = {
 export const blocks: ComponentMap<any> = {
   banner: Banner,
   button: Button,
+  'contact-button': ContactButton,
   tile: Tile,
   tiles: Tiles,
   feature: Feature,

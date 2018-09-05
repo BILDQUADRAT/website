@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Contact } from './contact';
+import { mapBlock, BlokData } from '../util/storyblok';
 
 interface BannerProps {
   headline: string;
   subheadline: string;
-  cta: string;
+  cta: BlokData[];
   image: string;
   className?: string;
 }
@@ -37,37 +37,14 @@ export class Banner extends React.Component<BannerProps, BannerState> {
           </header>
           <div className="content">
             <p>{subheadline}</p>
+
             <ul className="actions">
-              <li>
-                <a
-                  href="#one"
-                  className="button next scrolly"
-                  onClick={this.handleOpenContact}
-                >
-                  {cta}
-                </a>
-              </li>
+              {cta.map(blok => <li key={blok._uid}>{mapBlock(blok)}</li>)}
             </ul>
           </div>
         </div>
-
-        <Contact
-          isOpen={this.state.contactOpen}
-          onRequestClose={this.handleCloseContact}
-          onSubmitSuccess={this.handleCloseContact}
-        />
       </section>
     );
-  }
-
-  private handleOpenContact = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    ev.preventDefault();
-    this.setState({ contactOpen: true });
-  }
-
-  private handleCloseContact = (ev?: React.MouseEvent<any>) => {
-    ev && ev.preventDefault && ev.preventDefault();
-    this.setState({ contactOpen: false });
   }
 }
 
