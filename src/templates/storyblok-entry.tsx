@@ -11,18 +11,13 @@ export interface StoryblokEntryProps {
   }
 }
 
-export class StoryblokEntry extends React.Component<StoryblokEntryProps> {
-  render() {
-    const { story } = this.props;
-    const { component, _uid } = story.content;
+export const StoryblokEntry: React.SFC<StoryblokEntryProps> = ({ story }) => {
+  const { component, _uid } = story.content;
 
-    if(!(component in contentTypes)) {
-      return null;
-    }
-
-    return React.createElement(contentTypes[component], { key: _uid, story });
-  }
-}
+  return (component in contentTypes)
+    ? React.createElement(contentTypes[component], { key: _uid, story })
+    : null;
+};
 
 const withContext = (WrappedComponent: React.ComponentType<StoryblokEntryProps>) => {
   class StoryblokEntryContext extends React.Component<StoryblokEntryContextProps, StoryblokEntryProps> {

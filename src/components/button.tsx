@@ -8,13 +8,8 @@ export interface ButtonProps {
   target: string;
 }
 
-class Button extends React.Component<ButtonProps> {
-  render() {
-    const { target, text } = this.props;
-    return (
-      <Link to={target} className="button">{text}</Link>
-    )
-  }
-}
+const Button: React.SFC<ButtonProps> = ({ target, text }) => (
+  <Link to={target} className="button">{text}</Link>
+);
 
 export default Button;
