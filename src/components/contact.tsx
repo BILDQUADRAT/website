@@ -175,3 +175,16 @@ export class Contact extends React.Component<ContactProps, ContactState> {
       .catch(this.props.onSubmitFailure);
   }
 }
+
+// TODO(neolegends): Is there a better way to do this with Netlify?
+export const DummyContactForm: React.SFC = () => (
+  <form
+    className="contact dummy"
+    name="contact"
+    data-netlify={true}
+  >
+    <input type="text" name="name"/>
+    <input type="email" name="email"/>
+    <textarea name="message"/>
+  </form>
+);

@@ -20,6 +20,10 @@
     width: 100%;
     z-index: _misc(z-index-base) + 2;
 
+    &.dummy {
+        display: none;
+    }
+
     &.visible {
         @include vendor('pointer-events', 'auto');
         opacity: 1;
