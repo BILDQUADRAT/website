@@ -1,9 +1,10 @@
-import React from 'react'
-import { BlokData, mapBlocks, Story } from '../util/storyblok';
+import React from 'react';
+
 import withLayout from '../components/layout';
+import { mapBlocks, Story } from '../util/storyblok';
 
 export interface PageProps {
-  story: Story
+  story: Story;
 }
 
 const Page = (props: PageProps) => (

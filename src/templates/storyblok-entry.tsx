@@ -1,14 +1,15 @@
-import React from 'react'
-import { contentTypes } from '../components'
+import React from 'react';
+
+import { contentTypes } from '../components';
 
 export interface StoryblokEntryContextProps {
-  pathContext: StoryblokEntryProps
+  pathContext: StoryblokEntryProps;
 }
 
 export interface StoryblokEntryProps {
   story: {
-    content: any
-  }
+    content: any,
+  };
 }
 
 export const StoryblokEntry: React.SFC<StoryblokEntryProps> = ({ story }) => {
@@ -22,7 +23,7 @@ export const StoryblokEntry: React.SFC<StoryblokEntryProps> = ({ story }) => {
 const withContext = (WrappedComponent: React.ComponentType<StoryblokEntryProps>) => {
   class StoryblokEntryContext extends React.Component<StoryblokEntryContextProps, StoryblokEntryProps> {
     constructor(props: StoryblokEntryContextProps) {
-      super(props)
+      super(props);
       const story = {
         ...props.pathContext.story,
         content: JSON.parse(props.pathContext.story.content),
@@ -31,11 +32,11 @@ const withContext = (WrappedComponent: React.ComponentType<StoryblokEntryProps>)
     }
 
     render() {
-      return <WrappedComponent story={this.state.story} />
+      return <WrappedComponent story={this.state.story} />;
     }
   }
 
-  return StoryblokEntryContext
-}
+  return StoryblokEntryContext;
+};
 
-export default withContext(StoryblokEntry)
+export default withContext(StoryblokEntry);

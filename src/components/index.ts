@@ -1,16 +1,17 @@
 import Page from "../templates/page";
-import { Banner } from "./banner";
 import { Story } from "../util/storyblok";
-import { Tiles, Tile } from "./tiles";
-import { Feature, FeaturesAlternating } from "./feature";
+
+import { Banner } from "./banner";
 import Button from "./button";
+import { Feature, FeaturesAlternating } from "./feature";
+import { Tile, Tiles } from "./tiles";
 
 export interface ContentTypeProps {
-  story: Story,
+  story: Story;
 }
 
-export type ComponentMap<P> = {
-  [key: string]: React.ComponentClass<P> | React.SFC<P>
+export interface ComponentMap<P> {
+  [key: string]: React.ComponentClass<P> | React.SFC<P>;
 }
 
 export const contentTypes: ComponentMap<ContentTypeProps> = {

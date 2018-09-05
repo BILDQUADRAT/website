@@ -1,52 +1,52 @@
 import React from 'react';
-import SbEditable from 'storyblok-react'
+import SbEditable from 'storyblok-react';
 
 import { StoryblokEntry } from '../templates/storyblok-entry';
 
 declare global {
   interface Window {
-    storyblok: any
+    storyblok: any;
   }
 }
 
-const loadStoryblokBridge = function(cb: (ev: Event) => any) {
+const loadStoryblokBridge = (cb: (ev: Event) => any) => {
   const script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = `//app.storyblok.com/f/storyblok-latest.js?t=${process.env.STORYBLOK_ACCESS_TOKEN}`;
   script.onload = cb;
   document.body.appendChild(script);
-}
+};
 
-const getParam = function(val: string) {
-  var result = ''
-  var tmp = []
+const getParam = (val: string) => {
+  let result = '';
+  let tmp = [];
 
   location.search
     .substr(1)
     .split('&')
-    .forEach(function (item) {
-      tmp = item.split('=')
+    .forEach(item => {
+      tmp = item.split('=');
       if (tmp[0] === val) {
-        result = decodeURIComponent(tmp[1])
+        result = decodeURIComponent(tmp[1]);
       }
-    })
+    });
 
-  return result
-}
+  return result;
+};
 
 export interface StoryblokStory {
-  id: string,
-  content: any,
+  id: string;
+  content: any;
 }
 
 export interface StoryblokEditorState {
-  story: StoryblokStory | null
+  story: StoryblokStory | null;
 }
 
 class StoryblokEditor extends React.Component<{}, StoryblokEditorState> {
   constructor(props: {}) {
-    super(props)
-    this.state = { story: null }
+    super(props);
+    this.state = { story: null };
   }
 
   componentDidMount() {
@@ -56,7 +56,7 @@ class StoryblokEditor extends React.Component<{}, StoryblokEditorState> {
   loadStory(payload: { storyId: string }) {
     window.storyblok.get({
       slug: payload.storyId,
-      version: 'draft'
+      version: 'draft',
     }, (data: { story: StoryblokStory }) => {
       this.setState({ story: data.story });
     });
@@ -98,8 +98,8 @@ class StoryblokEditor extends React.Component<{}, StoryblokEditorState> {
       <SbEditable content={story.content}>
         <StoryblokEntry story={story} />
       </SbEditable>
-    )
+    );
   }
 }
 
-export default StoryblokEditor
+export default StoryblokEditor;
