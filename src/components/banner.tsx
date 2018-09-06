@@ -32,8 +32,16 @@ export class Banner extends React.Component<BannerProps, BannerState> {
   }
 
   render() {
-    const { className, headline, subheadline, cta, image, video_mp4, video_ogg, video_webm } = this.props;
-    const hasVideo = video_mp4 || video_ogg || video_webm;
+    const {
+      className,
+      cta,
+      headline,
+      image,
+      subheadline,
+      video_mp4,
+      video_ogg,
+      video_webm,
+    } = this.props;
 
     return (
       <section
@@ -41,7 +49,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
         className={className || "major"}
       >
         {image && <StoryblokImage src={image} alt="Banner Image" />}
-        {hasVideo && (
+        {(video_mp4 || video_ogg || video_webm) && (
           <div className="video-container">
             <video
               className="hidden"
