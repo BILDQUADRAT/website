@@ -50,6 +50,7 @@ export class Contact extends React.Component<ContactProps, ContactState> {
       this.nameRef.current && this.nameRef.current.focus();
     } else {
       document.body.classList.remove('contact-visible');
+      this.reset();
     }
   }
 
@@ -170,7 +171,6 @@ export class Contact extends React.Component<ContactProps, ContactState> {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       method: 'post',
     })
-      .then(() => this.reset())
       .then(this.props.onSubmitSuccess)
       .catch(this.props.onSubmitFailure);
   }
