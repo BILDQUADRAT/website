@@ -12,7 +12,7 @@ declare global {
 const loadStoryblokBridge = (cb: (ev: Event) => any) => {
   const script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = `//app.storyblok.com/f/storyblok-latest.js?t=${process.env.STORYBLOK_ACCESS_TOKEN}`;
+  script.src = `//app.storyblok.com/f/storyblok-latest.js?t=${process.env.GATSBY_STORYBLOK_ACCESS_TOKEN}`;
   script.onload = cb;
   document.body.appendChild(script);
 };
