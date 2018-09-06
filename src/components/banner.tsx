@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { mapBlock, BlokData } from '../util/storyblok';
+import StoryblokImage from '../util/storyblok-image';
 
 interface BannerProps {
   headline: string;
@@ -29,7 +30,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
         id="banner"
         className={className || "major"}
       >
-        {image && <img src={image} />}
+        {image && <StoryblokImage src={image} alt="Banner Image" />}
 
         <div className="inner">
           <header className="major">
