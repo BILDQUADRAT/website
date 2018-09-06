@@ -20,9 +20,8 @@ interface StoryblokImageProps {
  * @param option <width>x<height>
  */
 const resize = (image: string, width?: number, height: number = 0, smart: boolean = false) => {
-  const imageService = '//img2.storyblok.com/';
   const path = image.replace('//a.storyblok.com', '');
-  return `${imageService}${width}x${height}${smart ? '/smart' : ''}${path}`;
+  return `//img2.storyblok.com/${width}x${height}${smart ? '/smart' : ''}${path}`;
 };
 
 /**
