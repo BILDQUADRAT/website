@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface StoryblokImageProps {
-  alt: string;
+  alt?: string;
   aspectRatio?: number;
   className?: string;
   width?: number;
