@@ -11,17 +11,13 @@
         background-color: desaturate(lighten(_palette(bg-alt), 2), 1);
 
         > .image {
-            background-position: center center;
-            background-size: cover;
             border-radius: 0;
             display: block;
-            position: relative;
             width: 30%;
 
-            img {
-                border-radius: 0;
-                display: block;
+            > img {
                 width: 100%;
+                height: auto;
             }
 
             &:before {
