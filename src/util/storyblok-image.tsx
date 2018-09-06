@@ -1,11 +1,10 @@
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as React from 'react';
 
 interface StoryblokImageProps {
     alt: string;
-    aspectRatio: number;
+    aspectRatio?: number;
     className?: string;
-    width: number;
+    width?: number;
     height?: number;
     sizes: string[];
     smart?: boolean;
@@ -44,7 +43,7 @@ const StoryblokImage = (props: StoryblokImageProps) => {
     return <img
         alt={props.alt}
         className={props.className}
-        height={props.height || (props.aspectRatio ? props.width * props.aspectRatio : 0)}
+        height={props.height || (props.aspectRatio ? props.width * props.aspectRatio : undefined)}
         src={props.src}
         width={props.width}
         srcSet={generateSrcset(props.src, props.aspectRatio, props.smart)}
