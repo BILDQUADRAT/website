@@ -1,4 +1,4 @@
-import Page from "../templates/page";
+import Page from "../templates/blok-page";
 import { Story } from "../util/storyblok";
 
 import { Banner } from "./banner";
@@ -16,7 +16,7 @@ export interface ComponentMap<P> {
 }
 
 export const contentTypes: ComponentMap<ContentTypeProps> = {
-  page: Page,
+  'blok-page': Page,
 };
 
 export const blocks: ComponentMap<any> = {
