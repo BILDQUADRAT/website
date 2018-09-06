@@ -16,7 +16,6 @@
     "gatsby-plugin-sass": "^2.0.0-beta.5",
     "gatsby-plugin-typescript": "^2.0.0-beta.5",
     "gatsby-source-storyblok": "^0.1.1",
-    "lodash-es": "^4.17.10",
     "node-sass": "^4.9.2",
     "optional-chain": "^0.1.1",
     "react": "^16.4.1",
@@ -40,7 +39,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.1",
     "apollo": "^1.4.0",
     "delay": "^3.0.0",
     "graphql": "^0.13.2",

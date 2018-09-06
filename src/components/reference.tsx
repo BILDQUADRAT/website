@@ -1,7 +1,8 @@
-import chunk from 'lodash-es/chunk';
+import { Link } from 'gatsby';
 import * as React from 'react';
 
-import { mapBlock, BlokData } from '../util/storyblok';
+import { mapBlocks, BlokData } from '../util/storyblok';
+import StoryblokImage from '../util/storyblok-image';
 
 export interface ReferenceProps {
   customer: string;
@@ -13,19 +14,26 @@ export interface ReferenceProps {
 
 export interface ReferencesProps {
   references: BlokData[];
-  rowSize: number;
 }
 
-export const Reference: React.SFC<ReferenceProps> = ({ customer, description, image, title, target }) => (
-  <article className="reference"/>
+export const Reference: React.SFC<ReferenceProps> = ({ customer, description, image, target, title }) => (
+  <article className="reference">
+    <div className="image">
+      <StoryblokImage src={image} alt={title}/>
+    </div>
+
+    <Link to={target} className="inner">
+      <header className="major">
+        <h3>{title}</h3>
+      </header>
+      <p className="customer">{customer}</p>
+      <p className="description">{description}</p>
+    </Link>
+  </article>
 );
 
 export const References: React.SFC<ReferencesProps> = ({ references }) => (
   <section className="references">
-    {chunk(references, 3).map((chunk, i) => (
-      <ul className="row" key={i}>
-        {chunk.map(blok => <li key={blok._uid}>{mapBlock(blok)}</li>)}
-      </ul>
-    ))}
+    {mapBlocks(references)}
   </section>
 );
