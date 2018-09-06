@@ -42,18 +42,20 @@ export class Banner extends React.Component<BannerProps, BannerState> {
       >
         {image && <StoryblokImage src={image} alt="Banner Image" />}
         {hasVideo && (
-          <video
-            className="hidden"
-            controls={false}
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            ref={this.videoRef}
-          >
-            {video_mp4 && <source src={video_mp4} type="video/mp4"/>}
-            {video_ogg && <source src={video_ogg} type="video/ogg"/>}
-            {video_webm && <source src={video_webm} type="video/webm"/>}
-          </video>
+          <div className="video-container">
+            <video
+              className="hidden"
+              controls={false}
+              autoPlay={true}
+              loop={true}
+              muted={true}
+              ref={this.videoRef}
+            >
+              {video_mp4 && <source src={video_mp4} type="video/mp4"/>}
+              {video_ogg && <source src={video_ogg} type="video/ogg"/>}
+              {video_webm && <source src={video_webm} type="video/webm"/>}
+            </video>
+          </div>
         )}
 
         <div className="inner">
