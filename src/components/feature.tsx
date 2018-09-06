@@ -6,17 +6,17 @@ import { mapBlock, BlokData } from '../util/storyblok';
 import StoryblokImage from '../util/storyblok-image';
 
 export interface FeatureProps {
-  image: string;
-  title: string;
-  copy: string;
   buttons: BlokData[];
+  copy: string;
+  image: string;
   orientation: 'forward' | 'reverse' | '';
+  title: string;
 }
 export interface FeaturesAlternatingProps {
   items: BlokData[];
 }
 
-export const Feature: React.SFC<FeatureProps> = ({ orientation, image, title, copy, buttons }) => (
+export const Feature: React.SFC<FeatureProps> = ({ buttons, copy, image, orientation, title }) => (
   <section className={`feature ${orientation || ''}`}>
     <div className="image">
       <StoryblokImage
@@ -32,7 +32,6 @@ export const Feature: React.SFC<FeatureProps> = ({ orientation, image, title, co
           '100vw',
         ]} />  
     </div>
-    
     <div className="content">
       <div className="inner">
         <header className="major">
