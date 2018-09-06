@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import * as React from 'react';
 import Markdown from 'react-markdown';
 
@@ -20,17 +19,18 @@ export const Feature: React.SFC<FeatureProps> = ({ buttons, copy, image, orienta
   <section className={`feature ${orientation || ''}`}>
     <div className="image">
       <StoryblokImage
-        src={image} 
-        alt="Feature Image" 
-        width={100} 
+        src={image}
+        alt="Feature Image"
+        width={100}
         height={100}
-        aspectRatio={1/1}
+        aspectRatio={1 / 1}
         sizes={[
           '(min-width: 1680px) 30vw',
           '(min-width: 1280px) 40vw',
           '(min-width: 980px) 45vw',
           '100vw',
-        ]} />  
+        ]}
+      />
     </div>
     <div className="content">
       <div className="inner">

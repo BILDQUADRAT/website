@@ -2,7 +2,6 @@ import React from 'react';
 import SbEditable from 'storyblok-react';
 
 import { StoryblokEntry } from '../templates/storyblok-entry';
-import { mapBlock } from '../util/storyblok';
 
 declare global {
   interface Window {
