@@ -2,6 +2,7 @@ import React from 'react';
 import SbEditable from 'storyblok-react';
 
 import { StoryblokEntry } from '../templates/storyblok-entry';
+import { mapBlock } from '../util/storyblok';
 
 declare global {
   interface Window {
@@ -18,20 +19,12 @@ const loadStoryblokBridge = (cb: (ev: Event) => any) => {
 };
 
 const getParam = (val: string) => {
-  let result = '';
-  let tmp = [];
-
-  location.search
-    .substr(1)
+  const pair = location.search.substr(1)
     .split('&')
-    .forEach(item => {
-      tmp = item.split('=');
-      if (tmp[0] === val) {
-        result = decodeURIComponent(tmp[1]);
-      }
-    });
+    .map(part => part.split('=').map(decodeURIComponent) as [string, string])
+    .find(([k]) => k === val);
 
-  return result;
+  return pair ? pair[1] : '';
 };
 
 export interface StoryblokStory {
