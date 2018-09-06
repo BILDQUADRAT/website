@@ -1,10 +1,13 @@
 import Page from "../templates/blok-page";
+import GenericPage from '../templates/generic-page';
 import { Story } from "../util/storyblok";
 
 import { Banner } from "./banner";
 import Button from "./button";
 import { ContactButton } from "./contact-button";
 import { Feature, FeaturesAlternating } from "./feature";
+import { FullwidthImage } from "./fullwidth-image";
+import { Richtext } from "./richtext";
 import { Tile, Tiles } from "./tiles";
 
 export interface ContentTypeProps {
@@ -17,6 +20,7 @@ export interface ComponentMap<P> {
 
 export const contentTypes: ComponentMap<ContentTypeProps> = {
   'blok-page': Page,
+  'generic-page': GenericPage,
 };
 
 export const blocks: ComponentMap<any> = {
@@ -25,6 +29,8 @@ export const blocks: ComponentMap<any> = {
   'contact-button': ContactButton,
   feature: Feature,
   'feature-alternating': FeaturesAlternating,
+  'fullwidth-image': FullwidthImage,
+  richtext: Richtext,
   tile: Tile,
   tiles: Tiles,
 };
