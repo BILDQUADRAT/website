@@ -6,7 +6,7 @@ interface StoryblokImageProps {
     className?: string;
     width?: number;
     height?: number;
-    sizes: string[];
+    sizes?: string[];
     smart?: boolean;
     src: string;
 }
@@ -43,11 +43,11 @@ const StoryblokImage = (props: StoryblokImageProps) => {
     return <img
         alt={props.alt}
         className={props.className}
-        height={props.height || (props.aspectRatio ? props.width * props.aspectRatio : undefined)}
+        height={props.height || (props.aspectRatio && props.width ? props.width * props.aspectRatio : undefined)}
         src={props.src}
         width={props.width}
         srcSet={generateSrcset(props.src, props.aspectRatio, props.smart)}
-        sizes={props.sizes.join(', ')} />;
+        sizes={props.sizes ? props.sizes.join(', ') : undefined} />;
 }
 
 export default StoryblokImage;
