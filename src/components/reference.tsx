@@ -1,5 +1,6 @@
 import { Link } from 'gatsby';
 import * as React from 'react';
+import Markdown from 'react-markdown';
 
 import { mapBlocks, BlokData } from '../util/storyblok';
 import StoryblokImage from '../util/storyblok-image';
@@ -27,7 +28,7 @@ export const Reference: React.SFC<ReferenceProps> = ({ customer, description, im
         <h3>{title}</h3>
       </header>
       <p className="customer">{customer}</p>
-      <p className="description">{description}</p>
+      <Markdown className="description" source={description}/>
     </Link>
   </article>
 );
