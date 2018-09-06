@@ -6,8 +6,8 @@ export interface FullwidthImageProps {
 }
 
 // TODO(neolegends): Use StoryblokImage here
-export const FullwidthImage = (props: FullwidthImageProps) => (
+export const FullwidthImage: React.SFC<FullwidthImageProps> = ({ alt, image }) => (
   <span className="image main">
-    <img src={props.image} alt={props.alt}/>
+    <img src={image} alt={alt}/>
   </span>
 );

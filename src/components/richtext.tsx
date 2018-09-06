@@ -5,4 +5,4 @@ export interface RichtextProps {
   copy: string;
 }
 
-export const Richtext = (props: RichtextProps) => <Markdown source={props.copy}/>;
+export const Richtext: React.SFC<RichtextProps> = ({ copy }) => <Markdown source={copy}/>;
