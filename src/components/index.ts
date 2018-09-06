@@ -23,10 +23,10 @@ export const blocks: ComponentMap<any> = {
   banner: Banner,
   button: Button,
   'contact-button': ContactButton,
-  tile: Tile,
-  tiles: Tiles,
   feature: Feature,
   'feature-alternating': FeaturesAlternating,
+  tile: Tile,
+  tiles: Tiles,
 };
 
 export default {
