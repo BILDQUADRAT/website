@@ -1,8 +1,9 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import * as React from 'react';
 import Markdown from 'react-markdown';
 
 import { mapBlock, BlokData } from '../util/storyblok';
+import StoryblokImage from '../util/storyblok-image';
 
 export interface FeatureProps {
   image: string;
@@ -17,13 +18,27 @@ export interface FeaturesAlternatingProps {
 
 export const Feature: React.SFC<FeatureProps> = ({ orientation, image, title, copy, buttons }) => (
   <section className={`feature ${orientation || ''}`}>
-    <Link to="" className="image" style={{ backgroundImage: `url(${image})` }} />
+    <div className="image">
+      <StoryblokImage
+        src={image} 
+        alt="Feature Image" 
+        width={100} 
+        height={100}
+        aspectRatio={1/1}
+        sizes={[
+          '(min-width: 1680px) 30vw',
+          '(min-width: 1280px) 40vw',
+          '(min-width: 980px) 45vw',
+          '100vw',
+        ]} />  
+    </div>
+    
     <div className="content">
       <div className="inner">
         <header className="major">
           <h3>{title}</h3>
         </header>
-        <p><Markdown source={copy} /></p>
+        <Markdown source={copy} />
         <ul className="actions">
           {buttons.map((blok: BlokData) => (
             <li key={blok._uid}>
