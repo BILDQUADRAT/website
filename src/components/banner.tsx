@@ -52,7 +52,6 @@ export class Banner extends React.Component<BannerProps, BannerState> {
         {(video_mp4 || video_ogg || video_webm) && (
           <div className="video-container">
             <video
-              className="hidden"
               controls={false}
               autoPlay={true}
               loop={true}
@@ -92,7 +91,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
       return;
     }
 
-    this.videoRef.current.classList.remove('hidden'); // Fade it in
+    this.videoRef.current.classList.add('loaded'); // Fade it in
   }
 }
 
