@@ -1,0 +1,51 @@
+{
+  "name": "bildquadrat-website",
+  "description": "BILDQUADRAT website",
+  "version": "1.0.0",
+  "author": "Marcus Weiner <marcus.weiner@gmail.com>",
+  "dependencies": {
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-helmet": "^5.0.6",
+    "dotenv-safe": "^6.0.0",
+    "font-awesome": "^4.7.0",
+    "gatsby": "2.0.0-beta.36",
+    "gatsby-plugin-netlify": "^2.0.0-beta.3",
+    "gatsby-plugin-netlify-cache": "^0.1.0",
+    "gatsby-plugin-react-helmet": "^3.0.0-beta.3",
+    "gatsby-plugin-sass": "^2.0.0-beta.5",
+    "gatsby-plugin-typescript": "^2.0.0-beta.5",
+    "gatsby-source-storyblok": "^0.1.1",
+    "node-sass": "^4.9.2",
+    "optional-chain": "^0.1.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-helmet": "^5.2.0",
+    "react-markdown": "^3.4.1",
+    "storyblok-react": "^0.0.6",
+    "typescript": "^2.9.2"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "fix": "tslint -p . --fix",
+    "gql-codegen": "apollo codegen:generate \"--queries={src/**/*.tsx,.cache/fragments/*.js}\" --schema=http://localhost:8000/___graphql --tagName=graphql --target=typescript",
+    "gql-codegen:watch": "yarn gql-codegen --watch",
+    "lint": "tslint -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "apollo": "^1.4.0",
+    "delay": "^3.0.0",
+    "graphql": "^0.13.2",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
+    "tslint": "^5.10.0",
+    "tslint-react": "^3.6.0",
+    "typedoc": "^0.11.1"
+  }
+}

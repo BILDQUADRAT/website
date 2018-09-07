@@ -1,0 +1,13 @@
+html5up-forty/
+template-old/
+
+# Project dependencies
+.cache/
+node_modules/
+yarn-error.log
+
+# Build directory
+/public/
+
+# Config
+.env
