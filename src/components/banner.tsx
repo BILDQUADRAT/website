@@ -86,7 +86,8 @@ export class Banner extends React.Component<BannerProps, BannerState> {
       return;
     }
 
-    if (this.videoRef.current.readyState !== 4) { // Video is loaded and enough is buffered
+    // 4 means video is loaded and enough has been buffered for a couple secs playback
+    if (this.videoRef.current.readyState !== 4) {
       setTimeout(this.fadeInVideoOnceLoaded, 50);
       return;
     }
