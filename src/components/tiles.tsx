@@ -19,11 +19,11 @@ export const Tile: React.SFC<TileProps> = (props: TileProps) => (
   <article style={{ backgroundImage: `url(${props.image})` }}>
     <header className="major">
       <h3>
-        <Link to={props.target.cached_url} className="link">{props.title}</Link>
+        <Link to={`/${props.target.cached_url}`} className="link">{props.title}</Link>
       </h3>
       <p>{props.teaser}</p>
     </header>
-    <Link to={props.target.cached_url} className="link primary" />
+    <Link to={`/${props.target.cached_url}`} className="link primary" />
   </article>
 );
 

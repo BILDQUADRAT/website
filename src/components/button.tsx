@@ -11,7 +11,7 @@ export interface ButtonProps {
 const Button: React.SFC<ButtonProps> = ({ target, text }) => (
   <Link
     className="button"
-    to={(typeof target === 'string') ? target : target.cached_url}
+    to={(typeof target === 'string') ? target : `/${target.cached_url}`}
   >
     {text}
   </Link>
