@@ -8,7 +8,7 @@ export interface PageProps {
   story: Story;
 }
 
-const Page = (props: PageProps) => (
+const BlokPage = (props: PageProps) => (
   <>
     {mapBlocks(props.story.content.blocks)}
 
@@ -16,4 +16,4 @@ const Page = (props: PageProps) => (
   </>
 );
 
-export default withLayout<PageProps>(Page);
+export default withLayout<PageProps>(BlokPage);
