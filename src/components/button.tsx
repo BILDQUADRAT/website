@@ -1,13 +1,20 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
+import { StoryblokLink } from '../types';
+
 export interface ButtonProps {
   text: string;
-  target: string;
+  target: string | StoryblokLink;
 }
 
 const Button: React.SFC<ButtonProps> = ({ target, text }) => (
-  <Link to={target} className="button">{text}</Link>
+  <Link
+    className="button"
+    to={(typeof target === 'string') ? target : target.cached_url}
+  >
+    {text}
+  </Link>
 );
 
 export default Button;
