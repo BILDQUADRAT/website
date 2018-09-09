@@ -47,3 +47,11 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 }
+
+exports.onCreateWebpackConfig = ({ actions, stage }) => {
+  if (stage !== 'develop') {
+    return;
+  }
+
+  actions.setWebpackConfig({ devtool: 'source-map' });
+};
