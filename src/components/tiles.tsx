@@ -27,12 +27,8 @@ export const Tile: React.SFC<TileProps> = (props: TileProps) => (
   </article>
 );
 
-export const TileSection = (props: React.HTMLProps<HTMLDivElement>) => (
-  <section className="tiles" {...props} />
-);
-
-export const Tiles = (props: TilesProps) => (
-  <TileSection>
+export const Tiles: React.SFC<TilesProps> = (props: TilesProps) => (
+  <section className="tiles">
     {mapBlocks(props.items)}
-  </TileSection>
+  </section>
 );
