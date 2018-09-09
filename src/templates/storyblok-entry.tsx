@@ -8,7 +8,8 @@ export interface StoryblokEntryContextProps {
 
 export interface StoryblokEntryProps {
   story: {
-    content: any,
+    content: any;
+    uuid: string;
   };
 }
 
@@ -22,14 +23,30 @@ export const StoryblokEntry: React.SFC<StoryblokEntryProps> = ({ story }) => {
 
 const withContext = (WrappedComponent: React.ComponentType<StoryblokEntryProps>) => {
   class StoryblokEntryContext extends React.Component<StoryblokEntryContextProps, StoryblokEntryProps> {
-    constructor(props: StoryblokEntryContextProps) {
-      super(props);
+    static getDerivedStateFromProps(
+      props: StoryblokEntryContextProps,
+      state: StoryblokEntryProps,
+    ): Partial<StoryblokEntryProps> | null {
+      if (state.story.uuid === props.pathContext.story.uuid) {
+        return null;
+      }
 
+      return StoryblokEntryContext.prepareStory(props);
+    }
+
+    static prepareStory(props: StoryblokEntryContextProps): StoryblokEntryProps {
       const story = {
         ...props.pathContext.story,
         content: JSON.parse(props.pathContext.story.content),
       };
-      this.state = { story };
+
+      return { story };
+    }
+
+    constructor(props) {
+      super(props);
+
+      this.state = StoryblokEntryContext.prepareStory(props);
     }
 
     render() {
