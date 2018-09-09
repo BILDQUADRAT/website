@@ -11,6 +11,8 @@ interface StoryblokImageProps {
   src: string;
 }
 
+const STORYBLOK_IMG_HOST = '//a.storyblok.com';
+
 /**
  * Generates a URL for Storyblok's Image Service
  *
@@ -20,7 +22,7 @@ interface StoryblokImageProps {
  * @param option <width>x<height>
  */
 const resize = (image: string, width?: number, height: number = 0, smart: boolean = false) => {
-  const path = image.replace('//a.storyblok.com', '');
+  const path = image.replace(STORYBLOK_IMG_HOST, '');
   return `//img2.storyblok.com/${width}x${height}${smart ? '/smart' : ''}${path}`;
 };
 
@@ -37,12 +39,16 @@ const generateSrcset = (
   smart: boolean = false,
   maxWidth: number = 3000,
   stepSize: number = 100,
-) => (
-  Array.apply(null, {length: Math.floor(maxWidth / stepSize)})
+): string | undefined => {
+  if (!image.includes(STORYBLOK_IMG_HOST)) {
+    return undefined;
+  }
+
+  return Array.apply(null, {length: Math.floor(maxWidth / stepSize)})
     .map((e, i) => (i + 1) * stepSize)
     .map(width => `${resize(image, width, aspectRatio ? width * aspectRatio : 0, smart)} ${width}w`)
-    .join(', ')
-);
+    .join(', ');
+};
 
 const StoryblokImage = (props: StoryblokImageProps) => (
   <img

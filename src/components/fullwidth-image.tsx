@@ -1,13 +1,21 @@
 import * as React from 'react';
 
+import StoryblokImage from '../util/storyblok-image';
+
 export interface FullwidthImageProps {
-  alt: string;
+  alt?: string;
+  height?: number;
   image: string;
+  width?: number;
 }
 
-// TODO(neolegends): Use StoryblokImage here
-export const FullwidthImage: React.SFC<FullwidthImageProps> = ({ alt, image }) => (
+export const FullwidthImage: React.SFC<FullwidthImageProps> = ({ alt, height, image, width }) => (
   <span className="image main">
-    <img src={image} alt={alt}/>
+    <StoryblokImage
+      src={image}
+      alt={alt}
+      height={height}
+      width={width}
+    />
   </span>
 );
