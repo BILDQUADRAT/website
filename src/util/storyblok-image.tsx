@@ -44,7 +44,7 @@ const generateSrcset = (
     return undefined;
   }
 
-  return Array.apply(null, {length: Math.floor(maxWidth / stepSize)})
+  return Array.apply(null, { length: Math.floor(maxWidth / stepSize) })
     .map((e, i) => (i + 1) * stepSize)
     .map(width => `${resize(image, width, aspectRatio ? width * aspectRatio : 0, smart)} ${width}w`)
     .join(', ');
