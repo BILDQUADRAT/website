@@ -3,6 +3,7 @@ import React from 'react';
 
 import { StoryblokLink } from '../types';
 import { mapBlocks, BlokData } from '../util/storyblok';
+import StoryblokImage from '../util/storyblok-image';
 
 export interface TileProps {
   image: string;
@@ -15,8 +16,14 @@ export interface TilesProps {
   items: BlokData[];
 }
 
+// TODO(leolabs): Specify background image sizes for better browser img selection
 export const Tile: React.SFC<TileProps> = (props: TileProps) => (
-  <article style={{ backgroundImage: `url(${props.image})` }}>
+  <article className="tile">
+    <StoryblokImage
+      className="background"
+      src={props.image}
+    />
+
     <header className="major">
       <h3>
         <Link to={`/${props.target.cached_url}`} className="link">{props.title}</Link>
