@@ -24,6 +24,7 @@ export const Footer: React.SFC<FooterProps> = (props) => (
       </ul>
       <ul className="copyright">
         <li>© {(new Date()).getFullYear()} {props.title}</li>
+        <li>Theme by <a href="https://html5up.net">HTML5 UP</a></li>
       </ul>
     </div>
   </footer>
