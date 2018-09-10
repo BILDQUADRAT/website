@@ -19,6 +19,7 @@ module.exports = {
         },
         mergeSecurityHeaders: true,
         transformHeaders: (headers, path) => {
+          // Strip out predefined X-Frame-Options: DENY-header
           return (path === '/*')
             ? headers.filter(h => h.split(': ')[1].indexOf('DENY') === -1)
             : headers;
