@@ -5,8 +5,8 @@ const storyblokEntryPath = path.resolve('src/templates/storyblok-entry.tsx');
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const result = await graphql(
-    `{
+  const result = await graphql(`
+    {
       allStoryblokEntry {
         edges {
           node {
@@ -23,8 +23,8 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-    }`
-  );
+    }
+  `);
 
   if (result.errors) {
     console.error(result.errors);
