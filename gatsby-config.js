@@ -8,7 +8,23 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     'gatsby-plugin-typescript',
-    'gatsby-plugin-netlify',
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        headers: {
+          '/*': [
+            "Content-Security-Policy: frame-ancestors 'self' https://*.storyblok.com/",
+            "X-Frame-Options: ALLOW-FROM https://app.storyblok.com/",
+          ]
+        },
+        mergeSecurityHeaders: true,
+        transformHeaders: (headers, path) => {
+          return (path === '/*')
+            ? headers.filter(h => h.split(': ')[1].indexOf('DENY') === -1)
+            : headers;
+        }
+      }
+    },
     'gatsby-plugin-netlify-cache',
     {
       resolve: 'gatsby-source-storyblok',
