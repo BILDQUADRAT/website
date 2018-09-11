@@ -23,6 +23,14 @@ export interface Story extends StoryBase {
   content: BlokData;
 }
 
+export interface StoryblokLink {
+  cached_url: string;
+  fieldtype: string;
+  id: string;
+  linktype: string;
+  url: string;
+}
+
 export interface BlokData {
   _uid: string;
   component: string;

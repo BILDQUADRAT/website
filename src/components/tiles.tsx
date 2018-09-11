@@ -1,8 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
-import { StoryblokLink } from '../types';
-import { mapBlocks, BlokData } from '../util/storyblok';
+import { mapBlocks, BlokData, StoryblokLink } from '../util/storyblok';
 import StoryblokImage from '../util/storyblok-image';
 
 export interface TileProps {

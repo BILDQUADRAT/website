@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
-import { StoryblokLink } from '../types';
+import { StoryblokLink } from '../util/storyblok';
 
 export interface ButtonProps {
   text: string;
