@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { contentTypes } from '../components';
+import { SerializedStory, Story } from '../util/storyblok';
 
 export interface StoryblokEntryContextProps {
-  pathContext: StoryblokEntryProps;
+  pathContext: {
+    story: SerializedStory;
+  };
 }
 
 export interface StoryblokEntryProps {
-  story: {
-    content: any;
-    uuid: string;
-  };
+  story: Story;
 }
 
 export const StoryblokEntry: React.SFC<StoryblokEntryProps> = ({ story }) => {

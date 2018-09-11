@@ -3,17 +3,24 @@ import SbEditable from 'storyblok-react';
 
 import { blocks } from '../components';
 
-export interface Story {
+interface StoryBase {
   id: string;
   name: string;
   created_at: string;
   uuid: string;
   slug: string;
   full_slug: string;
-  content: BlokData;
   is_startpage: boolean;
   parent_id: number | string;
   group_id: string;
+}
+
+export interface SerializedStory extends StoryBase {
+  content: string;
+}
+
+export interface Story extends StoryBase {
+  content: BlokData;
 }
 
 export interface BlokData {
