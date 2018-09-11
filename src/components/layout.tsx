@@ -8,9 +8,6 @@ import { LayoutMetadata } from './__generated__/LayoutMetadata';
 import { Footer } from './footer';
 import Header from './header';
 
-interface LayoutProps {
-}
-
 const render = (children: React.ReactNode) => (data: LayoutMetadata) => {
   if (!data || !data.site || !data.site.siteMetadata) {
     return null;
@@ -45,7 +42,7 @@ const render = (children: React.ReactNode) => (data: LayoutMetadata) => {
   );
 };
 
-const LayoutComponent: React.SFC<LayoutProps> = ({ children }) => (
+const LayoutComponent: React.SFC = ({ children }) => (
   <StaticQuery
     query={graphql`
     query LayoutMetadata {
