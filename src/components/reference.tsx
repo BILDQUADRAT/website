@@ -19,16 +19,18 @@ export interface ReferencesProps {
 
 export const Reference: React.SFC<ReferenceProps> = ({ customer, description, image, target, title }) => (
   <article className="reference">
-    <Link to={target.cached_url} className="inner">
+    <Link to={target.cached_url}>
       <div className="image">
         <StoryblokImage src={image} alt={title}/>
       </div>
 
-      <header className="major">
-        <h3>{title}</h3>
-      </header>
-      <p className="customer">{customer}</p>
-      <Markdown className="description" source={description}/>
+      <div className="inner">
+        <header className="major">
+          <h3>{title}</h3>
+        </header>
+        <p className="customer">{customer}</p>
+        <Markdown className="description" source={description}/>
+      </div>
     </Link>
   </article>
 );
