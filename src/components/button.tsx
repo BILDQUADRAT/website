@@ -8,7 +8,7 @@ export interface ButtonProps {
   target: string | StoryblokLink;
 }
 
-const Button: React.SFC<ButtonProps> = ({ target, text }) => (
+export const Button: React.SFC<ButtonProps> = ({ target, text }) => (
   <Link
     className="button"
     to={(typeof target === 'string') ? target : `/${target.cached_url}`}
@@ -16,5 +16,3 @@ const Button: React.SFC<ButtonProps> = ({ target, text }) => (
     {text}
   </Link>
 );
-
-export default Button;

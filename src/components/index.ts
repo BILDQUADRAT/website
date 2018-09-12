@@ -3,7 +3,7 @@ import GenericPage from '../templates/generic-page';
 import { Story } from "../util/storyblok";
 
 import { Banner } from "./banner";
-import Button from "./button";
+import { Button } from "./button";
 import { ContactButton } from "./contact-button";
 import { Feature, FeaturesAlternating } from "./feature";
 import { FullwidthImage } from "./fullwidth-image";
