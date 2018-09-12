@@ -16,6 +16,7 @@
 
         .image {
             height: 50%;
+            margin-bottom: 2em;
 
             img {
                 height: 100%;
@@ -27,11 +28,14 @@
         .inner {
             border-bottom: none;
             text-overflow: ellipsis;
-            padding-top: 2em;
 
             &, > * {
                 display: block;
             }
+        }
+
+        .description :last-child {
+            margin-bottom: 0;
         }
     }
 }
