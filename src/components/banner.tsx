@@ -30,6 +30,19 @@ export class Banner extends React.Component<BannerProps, BannerState> {
 
   componentDidMount() {
       this.fadeInVideoOnceLoaded();
+
+      document.addEventListener('page-blur', (e: any) => {
+        if (!this.videoRef.current) {
+          return;
+        }
+
+        if (e.detail.blurred) {
+          this.videoRef.current.pause();
+        } else {
+          this.videoRef.current.play();
+        }
+
+      });
   }
 
   render() {

@@ -38,6 +38,7 @@ class Header extends Component<HeaderProps, HeaderState> {
       event.preventDefault();
     }
     this.setState({ menuOpen: true });
+    document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: true}}));
   }
 
   closeMenu(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -45,6 +46,7 @@ class Header extends Component<HeaderProps, HeaderState> {
       event.preventDefault();
     }
     this.setState({ menuOpen: false });
+    document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: false}}));
   }
 
   render() {
