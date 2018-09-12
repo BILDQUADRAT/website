@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import { mapBlock, BlokData } from '../util/storyblok';
@@ -45,8 +46,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
 
     return (
       <section
-        id="banner"
-        className={className || "major"}
+        className={classNames(className || "major", "banner")}
       >
         {image && <StoryblokImage src={image} alt="Banner Image" />}
         {(video_mp4 || video_ogg || video_webm) && (

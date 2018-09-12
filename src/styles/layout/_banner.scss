@@ -6,7 +6,7 @@
 
 /* Banner */
 
-    #banner {
+    .banner {
         @include vendor('align-items', 'center');
         //@include vendor('background-image', 'url("../../images/banner.jpg")');
         @include vendor('display', 'flex');
