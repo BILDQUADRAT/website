@@ -47,9 +47,11 @@ export class Contact extends React.Component<ContactProps, ContactState> {
 
     if (this.props.isOpen) {
       document.body.classList.add('contact-visible');
+      document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: true}}));
       this.nameRef.current && this.nameRef.current.focus();
     } else {
       document.body.classList.remove('contact-visible');
+      document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: false}}));
       this.reset();
     }
   }
