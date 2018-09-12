@@ -11,7 +11,7 @@ export interface FooterProps {
 }
 
 export const Footer: React.SFC<FooterProps> = (props) => (
-  <footer id="footer">
+  <footer>
     <div className="inner">
       <ul className="icons">
         {props.socialLinks.map(({ name, url }) => (
