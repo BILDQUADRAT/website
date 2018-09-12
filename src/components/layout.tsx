@@ -1,6 +1,5 @@
 import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
-import Helmet from 'react-helmet';
 
 import '../styles/main.scss';
 
@@ -17,13 +16,6 @@ const render = (children: React.ReactNode) => (data: LayoutMetadata) => {
 
   return (
     <>
-      <Helmet
-        title={title}
-        meta={[
-          { name: 'description', content: 'Sample' },
-          { name: 'keywords', content: 'sample, something' },
-        ]}
-      />
       <Header siteTitle={title}/>
 
       {children}
