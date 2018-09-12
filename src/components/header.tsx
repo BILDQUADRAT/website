@@ -33,7 +33,7 @@ class Header extends Component<HeaderProps, HeaderState> {
     }
   }
 
-  openMenu(event: React.MouseEvent<HTMLAnchorElement>) {
+  openMenu(event: React.MouseEvent<HTMLElement>) {
     if (event) {
       event.preventDefault();
     }
@@ -41,7 +41,7 @@ class Header extends Component<HeaderProps, HeaderState> {
     document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: true}}));
   }
 
-  closeMenu(event: React.MouseEvent<HTMLAnchorElement>) {
+  closeMenu(event: React.MouseEvent<HTMLElement>) {
     if (event) {
       event.preventDefault();
     }
@@ -53,7 +53,7 @@ class Header extends Component<HeaderProps, HeaderState> {
     return (
       <>
         <header id="header" className="alt">
-          <Link to="/" className="logo">bildquadrat</Link>
+          <Link to="/" className="logo"><img src="/images/logo-white.svg" alt="Bildquadrat Logo" /></Link>
           <nav>
               <a href="#menu" onClick={this.openMenu}>Menu</a>
           </nav>

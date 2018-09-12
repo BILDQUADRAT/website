@@ -13,14 +13,15 @@
 
     #header {
         @include vendor('display', 'flex');
+        @include vendor('align-items', 'center');
         background-color: _palette(bg-alt);
         box-shadow: 0 0 0.25em 0 rgba(0,0,0,0.15);
         cursor: default;
         font-weight: _font(weight-bold);
-        height: 3.25em;
+        height: 4.5em;
+        line-height: 4.5em;
         left: 0;
         letter-spacing: _font(letter-spacing-alt);
-        line-height: 3.25em;
         margin: 0;
         position: fixed;
         text-transform: uppercase;
@@ -30,35 +31,12 @@
 
         .logo {
             border: 0;
-            display: inline-block;
-            font-size: 0.8em;
-            height: inherit;
-            line-height: inherit;
+            display: flex;
             padding: 0 1.5em;
 
-            strong {
-                @include vendor('transition', (
-                    'background-color #{_duration(transition)} ease-in-out',
-                    'color #{_duration(transition)} ease-in-out'
-                ));
-                background-color: _palette(fg-bold);
-                color: _palette(bg);
-                display: inline-block;
-                line-height: 1.65em;
-                margin-right: 0.325em;
-                padding: 0 0.125em 0 (_font(letter-spacing-alt) + 0.125em);
-            }
-
-            &:hover {
-                strong {
-                    background-color: _palette(highlight);
-                }
-            }
-
-            &:active {
-                strong {
-                    background-color: desaturate(darken(_palette(highlight), 15), 5);
-                }
+            img {
+                width: 200px;
+                height: auto;
             }
         }
 
