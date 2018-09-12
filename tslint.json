@@ -29,6 +29,7 @@
     "no-empty": false,
     "no-empty-interface": false,
     "no-shadowed-variable": false,
+    "no-submodule-imports": false,
     "no-unsafe-finally": false,
     "no-unused-expression": false,
     "no-unused-variable": true,

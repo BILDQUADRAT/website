@@ -8,6 +8,7 @@ import { Button } from "./button";
 import { ContactButton } from "./contact-button";
 import { Feature, FeaturesAlternating } from "./feature";
 import { FullwidthImage } from "./fullwidth-image";
+import { Reference, References } from "./reference";
 import { Richtext } from "./richtext";
 import { Tile, Tiles } from "./tiles";
 
@@ -33,6 +34,8 @@ export const blocks: ComponentMap<any> = {
   'feature-alternating': FeaturesAlternating,
   'fullwidth-image': FullwidthImage,
   person: Person,
+  reference: Reference,
+  references: References,
   richtext: Richtext,
   tile: Tile,
   tiles: Tiles,
