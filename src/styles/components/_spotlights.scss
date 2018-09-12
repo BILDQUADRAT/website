@@ -8,6 +8,7 @@
     .feature {
         @include vendor('display', 'flex');
         @include vendor('flex-direction', 'row');
+        @include vendor('align-items', 'center');
         background-color: desaturate(lighten(_palette(bg-alt), 2), 1);
 
         > .image {
