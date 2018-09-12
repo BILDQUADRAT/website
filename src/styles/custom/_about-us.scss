@@ -1,45 +1,45 @@
 .about-us {
-    ul {
-        @include vendor('display', 'flex');
-        @include vendor('flex-flow', 'row wrap');
-        @include vendor('justify-content', 'center');
+  ul {
+    @include vendor('display', 'flex');
+    @include vendor('flex-flow', 'row wrap');
+    @include vendor('justify-content', 'center');
 
-        margin: auto;
+    margin: auto;
 
-        li {
-            border: none;
-            padding: 0;
-        }
+    li {
+      border: none;
+      padding: 0;
     }
+  }
 
-    .person {
-        background: _palette(bg-alt);
-        border: solid 1px _palette(border);
-        max-width: 500px;
-        margin: _size(element-margin) / 2;
-        padding: _size(element-margin) / 2;
+  .person {
+    background: _palette(bg-alt);
+    border: solid 1px _palette(border);
+    max-width: 500px;
+    margin: _size(element-margin) / 2;
+    padding: _size(element-margin) / 2;
 
-        .profile-row {
-            @include vendor('display', 'flex');
-            @include vendor('align-items', 'center');
+    .profile-row {
+      @include vendor('display', 'flex');
+      @include vendor('align-items', 'center');
 
-            margin-bottom: 1em;
+      margin-bottom: 1em;
 
-            header {
-                margin: 0;
+      header {
+        margin: 0;
 
-                h3 {
-                    text-transform: uppercase;
-                }
-            }
-
-            .profile {
-                border-radius: 50%;
-                height: 6em;
-                margin-right: _size(element-margin) / 2;
-                object-fit: cover;
-                width: 6em;
-            }
+        h3 {
+          text-transform: uppercase;
         }
+      }
+
+      .profile {
+        border-radius: 50%;
+        height: 6em;
+        margin-right: _size(element-margin) / 2;
+        object-fit: cover;
+        width: 6em;
+      }
     }
+  }
 }
