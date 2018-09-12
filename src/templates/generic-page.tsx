@@ -9,7 +9,7 @@ export interface GenericPageProps {
 }
 
 const GenericPage = (props: GenericPageProps) => (
-  <div id="main" className="alt">
+  <main className="alt">
     <section>
       <div className="inner">
         <header className="major">
@@ -21,7 +21,7 @@ const GenericPage = (props: GenericPageProps) => (
     </section>
 
     <DummyContactForm/>
-  </div>
+  </main>
 );
 
 export default withLayout<GenericPageProps>(GenericPage);
