@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 interface MenuProps {
   visible: boolean;
-  onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  onCloseMenu: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 class Menu extends Component<MenuProps, any> {
@@ -39,6 +39,7 @@ class Menu extends Component<MenuProps, any> {
           </ul>
         </div>
         <a className="close" onClick={this.props.onCloseMenu}>Close</a>
+        <div className="backdrop" onClick={this.props.onCloseMenu}/>
       </nav>,
       this.el,
     );

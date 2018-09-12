@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 export interface ContactProps {
   isOpen: boolean;
 
-  onRequestClose?: React.MouseEventHandler<HTMLAnchorElement>;
+  onRequestClose?: React.MouseEventHandler<HTMLElement>;
   onSubmitFailure?: (e: Error) => void;
   onSubmitSuccess?: () => void;
 }
@@ -137,6 +137,8 @@ export class Contact extends React.Component<ContactProps, ContactState> {
             </ul>
           </div>
         </div>
+
+        <div className="backdrop" onClick={this.props.onRequestClose} />
 
         <a
           className="close"
