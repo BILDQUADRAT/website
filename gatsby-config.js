@@ -28,7 +28,7 @@ module.exports = {
     },
     'gatsby-plugin-netlify-cache',
     {
-      resolve: '@bildquadrat/gatsby-source-storyblok',
+      resolve: '@neolegends/gatsby-source-storyblok',
       options: {
         accessToken: process.env.GATSBY_STORYBLOK_ACCESS_TOKEN,
         dataSources: ['social-links', 'main-menu'],
