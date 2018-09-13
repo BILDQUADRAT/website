@@ -13,6 +13,10 @@ interface HeaderState {
 }
 
 class Header extends Component<HeaderProps, HeaderState> {
+  static dispatchBlurEvent(blurred: boolean) {
+    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred } }));
+  }
+
   constructor(props: HeaderProps) {
     super(props);
 
@@ -26,15 +30,17 @@ class Header extends Component<HeaderProps, HeaderState> {
 
   componentWillUnmount() {
     document.body.classList.remove('menu-visible');
-    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred: false } }));
+    Header.dispatchBlurEvent(false);
   }
 
   componentDidUpdate(_: any, prevState: HeaderState) {
     if (prevState.menuOpen !== this.state.menuOpen) {
       if (this.state.menuOpen) {
         document.body.classList.add('menu-visible');
+        Header.dispatchBlurEvent(true);
       } else {
         document.body.classList.remove('menu-visible');
+        Header.dispatchBlurEvent(false);
       }
     }
   }
@@ -44,7 +50,6 @@ class Header extends Component<HeaderProps, HeaderState> {
       event.preventDefault();
     }
     this.setState({ menuOpen: true });
-    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred: true } }));
   }
 
   closeMenu(event: React.MouseEvent<HTMLElement>) {
@@ -52,7 +57,6 @@ class Header extends Component<HeaderProps, HeaderState> {
       event.preventDefault();
     }
     this.setState({ menuOpen: false });
-    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred: false } }));
   }
 
   render() {
