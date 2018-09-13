@@ -29,19 +29,19 @@ export class Banner extends React.Component<BannerProps, BannerState> {
   }
 
   componentDidMount() {
-      this.fadeInVideoOnceLoaded();
+    this.fadeInVideoOnceLoaded();
 
-      document.addEventListener('page-blur', (e: any) => {
-        if (!this.videoRef.current) {
-          return;
-        }
+    document.addEventListener('page-blur', (e: any) => {
+      if (!this.videoRef.current) {
+        return;
+      }
 
-        if (e.detail.blurred) {
-          this.videoRef.current.pause();
-        } else {
-          this.videoRef.current.play();
-        }
-      });
+      if (e.detail.blurred) {
+        this.videoRef.current.pause();
+      } else {
+        this.videoRef.current.play();
+      }
+    });
   }
 
   render() {
@@ -57,9 +57,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
     } = this.props;
 
     return (
-      <section
-        className={classNames(className || "major", "banner")}
-      >
+      <section className={classNames(className || "major", "banner")}>
         {image && <StoryblokImage src={image} alt="Banner Image" />}
         {(video_mp4 || video_ogg || video_webm) && (
           <div className="video-container">

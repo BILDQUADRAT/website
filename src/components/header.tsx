@@ -26,7 +26,7 @@ class Header extends Component<HeaderProps, HeaderState> {
 
   componentWillUnmount() {
     document.body.classList.remove('menu-visible');
-    document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: false}}));
+    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred: false } }));
   }
 
   componentDidUpdate(_: any, prevState: HeaderState) {
@@ -44,7 +44,7 @@ class Header extends Component<HeaderProps, HeaderState> {
       event.preventDefault();
     }
     this.setState({ menuOpen: true });
-    document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: true}}));
+    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred: true } }));
   }
 
   closeMenu(event: React.MouseEvent<HTMLElement>) {
@@ -52,19 +52,26 @@ class Header extends Component<HeaderProps, HeaderState> {
       event.preventDefault();
     }
     this.setState({ menuOpen: false });
-    document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: false}}));
+    document.dispatchEvent(new CustomEvent('page-blur', { detail: { blurred: false } }));
   }
 
   render() {
     return (
       <>
         <header id="header" className="alt">
-          <Link to="/" className="logo"><img src="/images/logo-white.svg" alt="Bildquadrat Logo" /></Link>
+          <Link to="/" className="logo">
+            <img src="/images/logo-white.svg" alt="Bildquadrat Logo" />
+          </Link>
           <nav>
-              <a href="#menu" onClick={this.openMenu}>Menu</a>
+            <a href="#menu" onClick={this.openMenu}>Menu</a>
           </nav>
         </header>
-        <Menu visible={this.state.menuOpen} onCloseMenu={this.closeMenu} menuItems={this.props.menuItems} />
+
+        <Menu
+          visible={this.state.menuOpen}
+          onCloseMenu={this.closeMenu}
+          menuItems={this.props.menuItems}
+        />
       </>
     );
   }
