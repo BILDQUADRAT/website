@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Marcus Weiner <marcus.weiner@gmail.com>",
   "dependencies": {
+    "@bildquadrat/gatsby-source-storyblok": "^0.1.1",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "@types/react-helmet": "^5.0.6",
@@ -16,7 +17,6 @@
     "gatsby-plugin-react-helmet": "^3.0.0-rc.1",
     "gatsby-plugin-sass": "^2.0.0-rc.2",
     "gatsby-plugin-typescript": "^2.0.0-rc.5",
-    "gatsby-source-storyblok": "^0.1.1",
     "node-sass": "^4.9.2",
     "optional-chain": "^0.1.1",
     "react": "^16.4.1",
