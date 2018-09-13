@@ -1,10 +1,11 @@
 import { Link } from 'gatsby';
 import React, { Component } from 'react';
 
-import Menu from './menu';
+import Menu, { MenuItem } from './menu';
 
 interface HeaderProps {
   siteTitle: string;
+  menuItems: MenuItem[];
 }
 
 interface HeaderState {
@@ -21,6 +22,11 @@ class Header extends Component<HeaderProps, HeaderState> {
 
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('menu-visible');
+    document.dispatchEvent(new CustomEvent('page-blur', {detail: {blurred: false}}));
   }
 
   componentDidUpdate(_: any, prevState: HeaderState) {
@@ -58,7 +64,7 @@ class Header extends Component<HeaderProps, HeaderState> {
               <a href="#menu" onClick={this.openMenu}>Menu</a>
           </nav>
         </header>
-        <Menu visible={this.state.menuOpen} onCloseMenu={this.closeMenu} />
+        <Menu visible={this.state.menuOpen} onCloseMenu={this.closeMenu} menuItems={this.props.menuItems} />
       </>
     );
   }

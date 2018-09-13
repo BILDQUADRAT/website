@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'gatsby';
 
 interface MenuProps {
   visible: boolean;
   onCloseMenu: (e: React.MouseEvent<HTMLElement>) => void;
+  menuItems: MenuItem[];
+}
+
+export interface MenuItem {
+  title: string;
+  url: string;
 }
 
 class Menu extends Component<MenuProps, any> {
@@ -28,14 +35,7 @@ class Menu extends Component<MenuProps, any> {
       <nav id="menu" className={this.props.visible ? 'menu-visible' : ''}>
         <div className="inner">
           <ul className="links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="landing.html">Landing</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
-          </ul>
-          <ul className="actions stacked">
-            <li><a href="#" className="button primary fit">Get Started</a></li>
-            <li><a href="#" className="button fit">Log In</a></li>
+            {this.props.menuItems.map(item => (<li><Link to={item.url}>{item.title}</Link></li>))}
           </ul>
         </div>
         <a className="close" onClick={this.props.onCloseMenu}>Close</a>

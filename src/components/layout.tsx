@@ -4,31 +4,37 @@ import React from 'react';
 import '../styles/main.scss';
 
 import { LayoutMetadata } from './__generated__/LayoutMetadata';
-import { Footer } from './footer';
+import { Footer, SocialMediaEntry } from './footer';
 import Header from './header';
+import { MenuItem } from './menu';
 
 const render = (children: React.ReactNode) => (data: LayoutMetadata) => {
-  if (!data || !data.site || !data.site.siteMetadata) {
+  if (
+    !data || !data.site || !data.site.siteMetadata ||
+    !data.allStoryblokDataSourceSocialLinks ||
+    !data.allStoryblokDataSourceMainMenu
+  ) {
     return null;
   }
 
   const title = data.site.siteMetadata!.title || '';
+  const socialLinks: SocialMediaEntry[] = data.allStoryblokDataSourceSocialLinks.edges!
+    .filter(link => link)
+    .map(link => ({name: link!.node!.name!, url: link!.node!.value!}));
+
+  const menuItems: MenuItem[] = data.allStoryblokDataSourceMainMenu.edges!
+    .filter(item => item)
+    .map(link => ({title: link!.node!.name!, url: link!.node!.value!}));
 
   return (
     <>
-      <Header siteTitle={title}/>
+      <Header siteTitle={title} menuItems={menuItems} />
 
       {children}
 
       <Footer
         title={title}
-        socialLinks={[ // todo(neolegends): Get this from storyblok's data sources
-          { name: 'facebook', url: 'https://www.facebook.com/bildquadrat' },
-          { name: 'twitter', url: 'https://twitter.com/bildquadrat' },
-          { name: 'google-plus', url: 'https://plus.google.com/+BildquadratTv' },
-          { name: 'vimeo', url: 'https://vimeo.com/bildquadrat' },
-          { name: 'youtube', url: 'https://www.youtube.com/bildquadrat' },
-        ]}
+        socialLinks={socialLinks}
       />
     </>
   );
@@ -41,6 +47,22 @@ const LayoutComponent: React.SFC = ({ children }) => (
       site {
         siteMetadata {
           title
+        }
+      }
+      allStoryblokDataSourceMainMenu {
+        edges {
+          node {
+            name,
+            value
+          }
+        }
+      }
+      allStoryblokDataSourceSocialLinks {
+        edges {
+          node {
+            name,
+            value
+          }
         }
       }
     }
