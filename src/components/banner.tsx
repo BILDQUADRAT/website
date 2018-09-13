@@ -41,7 +41,6 @@ export class Banner extends React.Component<BannerProps, BannerState> {
         } else {
           this.videoRef.current.play();
         }
-
       });
   }
 
