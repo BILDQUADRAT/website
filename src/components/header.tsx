@@ -34,14 +34,16 @@ class Header extends Component<HeaderProps, HeaderState> {
   }
 
   componentDidUpdate(_: any, prevState: HeaderState) {
-    if (prevState.menuOpen !== this.state.menuOpen) {
-      if (this.state.menuOpen) {
-        document.body.classList.add('menu-visible');
-        Header.dispatchBlurEvent(true);
-      } else {
-        document.body.classList.remove('menu-visible');
-        Header.dispatchBlurEvent(false);
-      }
+    if (prevState.menuOpen === this.state.menuOpen) {
+      return;
+    }
+
+    if (this.state.menuOpen) {
+      document.body.classList.add('menu-visible');
+      Header.dispatchBlurEvent(true);
+    } else {
+      document.body.classList.remove('menu-visible');
+      Header.dispatchBlurEvent(false);
     }
   }
 
