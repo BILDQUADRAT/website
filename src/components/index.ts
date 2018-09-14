@@ -17,7 +17,7 @@ export interface ContentTypeProps {
 }
 
 export interface ComponentMap<P> {
-  [key: string]: React.ComponentClass<P> | React.SFC<P>;
+  [key: string]: React.ComponentType<P>;
 }
 
 export const contentTypes: ComponentMap<ContentTypeProps> = {
