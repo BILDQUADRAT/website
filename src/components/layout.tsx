@@ -11,20 +11,24 @@ import { MenuItem } from './menu';
 const render = (children: React.ReactNode) => (data: LayoutMetadata) => {
   if (
     !data || !data.site || !data.site.siteMetadata ||
-    !data.allStoryblokDataSourceSocialLinks ||
-    !data.allStoryblokDataSourceMainMenu
+    !data.allStoryblokDataSourceEntry
   ) {
     return null;
   }
 
   const title = data.site.siteMetadata!.title || '';
-  const socialLinks: SocialMediaEntry[] = data.allStoryblokDataSourceSocialLinks.edges!
-    .filter(link => link)
-    .map(link => ({name: link!.node!.name!, url: link!.node!.value!}));
+  const dataSourceEntries = data.allStoryblokDataSourceEntry.edges!
+    .filter(node => node)
+    .map(edge => edge!.node)
+    .filter(node => node);
 
-  const menuItems: MenuItem[] = data.allStoryblokDataSourceMainMenu.edges!
-    .filter(item => item)
-    .map(link => ({title: link!.node!.name!, url: link!.node!.value!}));
+  const socialLinks: SocialMediaEntry[] = dataSourceEntries
+    .filter(entry => entry!.data_source === 'social-links')
+    .map(link => ({ name: link!.name!, url: link!.value! }));
+
+  const menuItems: MenuItem[] = dataSourceEntries
+    .filter(entry => entry!.data_source === 'main-menu')
+    .map(link => ({ title: link!.name!, url: link!.value! }));
 
   return (
     <>
@@ -49,19 +53,12 @@ const LayoutComponent: React.SFC = ({ children }) => (
           title
         }
       }
-      allStoryblokDataSourceMainMenu {
+      allStoryblokDataSourceEntry {
         edges {
           node {
             name,
-            value
-          }
-        }
-      }
-      allStoryblokDataSourceSocialLinks {
-        edges {
-          node {
-            name,
-            value
+            value,
+            data_source
           }
         }
       }

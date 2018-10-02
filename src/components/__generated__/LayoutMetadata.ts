@@ -15,54 +15,32 @@ export interface LayoutMetadata_site {
   siteMetadata: LayoutMetadata_site_siteMetadata | null;
 }
 
-export interface LayoutMetadata_allStoryblokDataSourceMainMenu_edges_node {
+export interface LayoutMetadata_allStoryblokDataSourceEntry_edges_node {
   name: string | null;
   value: string | null;
+  data_source: string | null;
 }
 
-export interface LayoutMetadata_allStoryblokDataSourceMainMenu_edges {
+export interface LayoutMetadata_allStoryblokDataSourceEntry_edges {
   /**
    * The item at the end of the edge
    */
-  node: LayoutMetadata_allStoryblokDataSourceMainMenu_edges_node | null;
+  node: LayoutMetadata_allStoryblokDataSourceEntry_edges_node | null;
 }
 
-export interface LayoutMetadata_allStoryblokDataSourceMainMenu {
+export interface LayoutMetadata_allStoryblokDataSourceEntry {
   /**
    * A list of edges.
    */
-  edges: (LayoutMetadata_allStoryblokDataSourceMainMenu_edges | null)[] | null;
-}
-
-export interface LayoutMetadata_allStoryblokDataSourceSocialLinks_edges_node {
-  name: string | null;
-  value: string | null;
-}
-
-export interface LayoutMetadata_allStoryblokDataSourceSocialLinks_edges {
-  /**
-   * The item at the end of the edge
-   */
-  node: LayoutMetadata_allStoryblokDataSourceSocialLinks_edges_node | null;
-}
-
-export interface LayoutMetadata_allStoryblokDataSourceSocialLinks {
-  /**
-   * A list of edges.
-   */
-  edges: (LayoutMetadata_allStoryblokDataSourceSocialLinks_edges | null)[] | null;
+  edges: (LayoutMetadata_allStoryblokDataSourceEntry_edges | null)[] | null;
 }
 
 export interface LayoutMetadata {
   site: LayoutMetadata_site | null;
   /**
-   * Connection to all StoryblokDataSourceMainMenu nodes
+   * Connection to all StoryblokDataSourceEntry nodes
    */
-  allStoryblokDataSourceMainMenu: LayoutMetadata_allStoryblokDataSourceMainMenu | null;
-  /**
-   * Connection to all StoryblokDataSourceSocialLinks nodes
-   */
-  allStoryblokDataSourceSocialLinks: LayoutMetadata_allStoryblokDataSourceSocialLinks | null;
+  allStoryblokDataSourceEntry: LayoutMetadata_allStoryblokDataSourceEntry | null;
 }
 
 /* tslint:disable */
