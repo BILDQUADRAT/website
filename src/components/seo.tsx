@@ -1,5 +1,6 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+
+import MetaTags from '../util/meta';
 
 export interface SeoProps {
   title: string;
@@ -9,7 +10,7 @@ export interface SeoProps {
 }
 
 export const Seo: React.SFC<SeoProps> = ({ og_description, og_image, og_title, title }) => (
-  <Helmet>
+  <MetaTags>
     <title>{title}</title>
     {og_title &&
       <meta property="og:title" content={og_title}/>}
@@ -17,5 +18,5 @@ export const Seo: React.SFC<SeoProps> = ({ og_description, og_image, og_title, t
       <meta property="og:image" content={og_image}/>}
     {og_description &&
       <meta property="og:description" content={og_description}/>}
-  </Helmet>
+  </MetaTags>
 );
