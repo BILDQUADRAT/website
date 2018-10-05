@@ -4,6 +4,7 @@ import { DummyContactForm } from '../components/contact';
 import withLayout from '../components/layout';
 import { Seo } from '../components/seo';
 import { mapBlocks, Story } from '../util/storyblok';
+import MetaTags from '../util/meta';
 
 export interface GenericPageProps {
   story: Story;
@@ -11,6 +12,14 @@ export interface GenericPageProps {
 
 const GenericPage = (props: GenericPageProps) => (
   <main className="alt">
+    <MetaTags>
+      {props.story.content.title && (
+        <>
+          <title>{props.story.content.title}</title>
+          <meta property="og:title" content={props.story.content.title}/>
+        </>
+      )}
+    </MetaTags>
     {props.story.content.seo && <Seo {...props.story.content.seo}/>}
 
     <section>

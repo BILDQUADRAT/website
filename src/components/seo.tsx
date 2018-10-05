@@ -11,9 +11,9 @@ export interface SeoProps {
 
 export const Seo: React.SFC<SeoProps> = ({ og_description, og_image, og_title, title }) => (
   <MetaTags>
-    <title>{title}</title>
-    {og_title &&
-      <meta property="og:title" content={og_title}/>}
+    {title && <title>{title}</title>}
+    {og_title || title &&
+      <meta property="og:title" content={og_title || title}/>}
     {og_image &&
       <meta property="og:image" content={og_image}/>}
     {og_description &&
