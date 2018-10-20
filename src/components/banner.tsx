@@ -17,6 +17,7 @@ interface BannerProps {
 
 interface BannerState {
   contactOpen: boolean;
+  videoLoaded: boolean;
 }
 
 export class Banner extends React.Component<BannerProps, BannerState> {
@@ -25,7 +26,10 @@ export class Banner extends React.Component<BannerProps, BannerState> {
   constructor(props: BannerProps) {
     super(props);
 
-    this.state = { contactOpen: false };
+    this.state = {
+      contactOpen: false,
+      videoLoaded: false,
+    };
   }
 
   componentDidMount() {
@@ -55,6 +59,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
       video_ogg,
       video_webm,
     } = this.props;
+    const { videoLoaded } = this.state;
 
     return (
       <section className={classNames(className || "major", "banner")}>
@@ -62,6 +67,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
         {(video_mp4 || video_ogg || video_webm) && (
           <div className="video-container">
             <video
+              className={classNames({ loaded: videoLoaded })}
               controls={false}
               autoPlay={true}
               loop={true}
@@ -99,7 +105,7 @@ export class Banner extends React.Component<BannerProps, BannerState> {
 
     const fadeIn = () => {
       videoEl.removeEventListener('canplay', fadeIn);
-      videoEl.classList.add('loaded');
+      this.setState({ videoLoaded: true });
     };
     videoEl.addEventListener('canplay', fadeIn);
   }
