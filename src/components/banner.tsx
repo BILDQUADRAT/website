@@ -91,18 +91,17 @@ export class Banner extends React.Component<BannerProps, BannerState> {
     );
   }
 
-  private fadeInVideoOnceLoaded = () => {
-    if (!this.videoRef.current) {
+  private fadeInVideoOnceLoaded() {
+    const videoEl = this.videoRef.current;
+    if (!videoEl) {
       return;
     }
 
-    // 4 means video is loaded and enough has been buffered for a couple secs playback
-    if (this.videoRef.current.readyState !== 4) {
-      setTimeout(this.fadeInVideoOnceLoaded, 50);
-      return;
-    }
-
-    this.videoRef.current.classList.add('loaded'); // Fade it in
+    const fadeIn = () => {
+      videoEl.removeEventListener('canplay', fadeIn);
+      videoEl.classList.add('loaded');
+    };
+    videoEl.addEventListener('canplay', fadeIn);
   }
 }
 
